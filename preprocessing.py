@@ -9,7 +9,6 @@ def savedocs(folderpath):
 	import os
 
 	docs = list()
-	voc = list()
 
 	# getting stopwords
 	stopwords = list()
@@ -17,6 +16,15 @@ def savedocs(folderpath):
 	for r in f:
 		r = r.splitlines()
 		stopwords.append(r[0])
+	f.close()
+
+	# saving acronym dictionary
+	acronyms = dict()
+	f = open('acronym_dict','rb')
+	for r in f:
+		r = r.splitlines()
+		r = r[0].split(',')
+		acronyms[r[0]] = r[1]
 
 	if folderpath:
 		for filename in os.listdir(folderpath):
@@ -37,18 +45,22 @@ def savedocs(folderpath):
 
 	# deleting stop words and tokens containing only punctuation
 	for i in range(0,len(docs)):
+		temp_doci = list()
+
 		for j in range(0,len(docs[i])):
 
 			# need to use a pre-built vocabulary and keep only those words which are in the vocabulary
 			# currently just building the vocabulary from the corpus itself
-			if docs[i][j] in stopwords: docs[i][j]='a'
-			if re.search('[a-zA-Z]',docs[i][j]) == None: docs[i][j]='a'
-			if docs[i][j]!='a' and docs[i][j] not in voc: voc.append(docs[i][j])
+			if docs[i][j] in stopwords: continue
+			elif re.search('[a-zA-Z]',docs[i][j]) == None: continue
+			elif docs[i][j] in acronyms:
+				tempstr = acronyms[docs[i][j]]
+				tempstr = word_tokenize(tempstr)
+				temp_doci.extend(tempstr)
+			else: temp_doci.append(docs[i][j])
+		docs[i] = temp_doci
 
-		docs[i] = [x for x in docs[i] if x != 'a']
-		assignments[i] = [0 for x in docs[i] if x != 'a']
-
-	return docs,voc
+	return docs
 
 def main():
 
@@ -57,7 +69,7 @@ def main():
 	parser.add_option("--folderpath",dest="folderpath",help="corpus folder path - where each document has a seperate file for it")
 	(options,args) = parser.parse_args()
 	
-	docs = savedocs(options.savedocs)
+	docs = savedocs(options.folderpath)
 
-if __name__ = "__main__":
+if __name__ == "__main__":
 	main()
