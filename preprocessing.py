@@ -43,6 +43,12 @@ def savedocs(folderpath):
 		print "enter folderpath"
 		exit()
 
+	# regex for mapping words like hahha, hehehe to laugh
+	p = re.compile('(a|e)*(h+(a|e)+)+h*')
+
+	# regex for handling repeated characters in words like 'homeee'
+	q = re.compile(r"[a-z]*(\w)\1{2,}[a-z]*")
+
 	# deleting stop words and tokens containing only punctuation
 	for i in range(0,len(docs)):
 		temp_doci = list()
@@ -57,9 +63,18 @@ def savedocs(folderpath):
 				tempstr = acronyms[docs[i][j]]
 				tempstr = word_tokenize(tempstr)
 				temp_doci.extend(tempstr)
+			elif p.match(docs[i][j]): temp_doci.append('laugh')
+			elif q.match(docs[i][j]):
+				tempword = docs[i][j][0] + docs[i][j][1]
+				for k in range(2,len(docs[i][j])):
+					if not(docs[i][j][k] == docs[i][j][k-1] and docs[i][j][k] == docs[i][j][k-2]):
+						tempword += docs[i][j][k]
+				temp_doci.append(tempword)
+				print tempword
 			else: temp_doci.append(docs[i][j])
 		docs[i] = temp_doci
 
+	print docs
 	return docs
 
 def main():
