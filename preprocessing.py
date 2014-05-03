@@ -10,7 +10,7 @@ def savedocs(folderpath):
 	import re
 	import os
 
-	docs = list()
+	#docs = list()
 
 	# getting stopwords
 #	stopwords = list()
@@ -34,10 +34,19 @@ def savedocs(folderpath):
 		acronyms[r[0]] = r[1]
 	print 'built acronym dictionary'
 
+	# regex for mapping words like hahha, hehehe to laugh
+	p = re.compile('(a|e)*(h+(a|e)+)+h*')
+
+	# regex for handling repeated characters in words like 'homeee'
+	q = re.compile(r"[a-z]*(\w)\1{2,}[a-z]*")
+	
 	if folderpath:
 		for filename in os.listdir(folderpath):
+		
 			filename = folderpath + '/' + filename
-			f = open(filename,'rb')
+			f = open(filename,'rb')	
+			print 'processing file:',filename
+
 			singledocs = list()
 			counter = 0
 			for r in f:
@@ -47,65 +56,46 @@ def savedocs(folderpath):
 				r = r[0].lower()
 				tokens = [word for sent in sent_tokenize(r) for word in word_tokenize(sent)]
 				singledocs.extend(tokens)
-			docs.append(singledocs)
+
+			temp_doci = list()
+
+			for j in range(0,len(singledocs)):
+
+				if singledocs[j] in stopwords: continue
+				elif re.search('[a-zA-Z]',singledocs[j]) == None: continue
+				elif singledocs[j] in acronyms:
+					tempstr = acronyms[singledocs[j]]
+					tempstr = word_tokenize(tempstr)
+					temp_doci.extend(tempstr)
+				elif p.match(singledocs[j]): temp_doci.append('laugh')
+				elif q.match(singledocs[j]):
+					tempword = singledocs[j][0] + singledocs[j][1]
+					for k in range(2,len(singledocs[j])):
+						if not(singledocs[j][k] == singledocs[j][k-1] and singledocs[j][k] == singledocs[j][k-2]):
+							tempword += singledocs[j][k]
+					if tempword not in vocab: tempword = correct(tempword)
+					temp_doci.append(tempword)
+				elif singledocs[j] not in vocab:
+					tempword = correct(singledocs[j])
+					temp_doci.append(tempword)
+				else: temp_doci.append(singledocs[j])
+
+			temp_dock = list()
+			for k in range(0,len(temp_doci)):
+				if temp_doci[k] in stopwords: continue
+				else: temp_dock.append(temp_doci[k])
+
+			filename1 = 'processedstatusfiles/' + filename
+			fout = open(filename1,'wb')
+			for item in singledocs:
+  				fout.write("%s\n" % item)
+
 			f.close()
-		print 'saved corpus'
 
 	else:
 		print "enter folderpath"
 		exit()
 
-	# regex for mapping words like hahha, hehehe to laugh
-	p = re.compile('(a|e)*(h+(a|e)+)+h*')
-
-	# regex for handling repeated characters in words like 'homeee'
-	q = re.compile(r"[a-z]*(\w)\1{2,}[a-z]*")
-
-	# deleting stop words and tokens containing only punctuation
-	for i in range(0,len(docs)):
-
-		print 'processing file ',i
-		temp_doci = list()
-
-		for j in range(0,len(docs[i])):
-
-			# need to use a pre-built vocabulary and keep only those words which are in the vocabulary
-			# currently just building the vocabulary from the corpus itself
-			if docs[i][j] in stopwords: continue
-			elif re.search('[a-zA-Z]',docs[i][j]) == None: continue
-			elif docs[i][j] in acronyms:
-				tempstr = acronyms[docs[i][j]]
-				tempstr = word_tokenize(tempstr)
-				temp_doci.extend(tempstr)
-			elif p.match(docs[i][j]): temp_doci.append('laugh')
-			elif q.match(docs[i][j]):
-				tempword = docs[i][j][0] + docs[i][j][1]
-				for k in range(2,len(docs[i][j])):
-					if not(docs[i][j][k] == docs[i][j][k-1] and docs[i][j][k] == docs[i][j][k-2]):
-						tempword += docs[i][j][k]
-				if tempword not in vocab: 
-					print tempword
-					tempword = correct(tempword)
-					print tempword
-				temp_doci.append(tempword)
-			elif docs[i][j] not in vocab:
-				tempword = correct(docs[i][j])
-				print docs[i][j],tempword
-				temp_doci.append(tempword)
-			else: temp_doci.append(docs[i][j])
-
-		temp_dock = list()
-		for k in range(0,len(temp_doci)):
-
-			if temp_doci[k] in stopwords: continue
-			else: temp_dock.append(temp_doci[k])
-
-		docs[i] = temp_dock
-
-
-
-	print docs
-	return docs
 
 def main():
 
@@ -114,7 +104,7 @@ def main():
 	parser.add_option("--folderpath",dest="folderpath",help="corpus folder path - where each document has a seperate file for it")
 	(options,args) = parser.parse_args()
 	
-	docs = savedocs(options.folderpath)
+	savedocs(options.folderpath)
 
 if __name__ == "__main__":
 	main()
