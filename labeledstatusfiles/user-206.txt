@@ -1,6 +1,6 @@
 206
 1cff420d9e6c5f13f72e635ef75639a2
-21
+13
 -
 "details, details"
 for us it's automatic

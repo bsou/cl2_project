@@ -1,6 +1,6 @@
 32
 927e28b6bb60bb344fc2fd41a14e0fdb
-29
+21
 -
 """você sabe que dá pra piorar, né?!"""
 "sorte de hoje do orkut: ""o sucesso não é o final e o fracasso não é fatal: o que conta é a coragem para seguir em frente."" cruzes. vou <propfirst> me matar e já volto."

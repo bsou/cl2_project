@@ -1,6 +1,6 @@
 368
 18777be6f07a938f5e4525eeb77dfdb2
-23
+21
 -
 "nagyon okosan, 5 év után vettem észre hogy a sataii-es vinyóm, csak satai-ként funkcionál, mivel a jumper <propfemale> letiltja a sataii-t és <propfemale>r?l azt hittem, hogy eltávolitottam 5 éve, beletört annó. most sikerült eltávolitanom a maradványait és voilá. hajrá én!"
 "népirtást fogok rendezni az ismer?sök között. semmi személyes, csak kicsit sokan vagytok :d"

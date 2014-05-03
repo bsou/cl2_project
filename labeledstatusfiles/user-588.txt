@@ -1,6 +1,6 @@
 588
 da15caa632bc137b9baa7e483b115fd5
-40
+38
 +
 """i need a miracle / i wanna be your girl / give me a <propmale> to see / that you are made for me / i need a miracle / please let me be your girl / one day you'll see it can happen to me."""
 "there is nothing in this world that is more precious to me than you are, even if you don't realize it."

@@ -1,5 +1,5 @@
 162
 57073726980cb535c14932f6d9fa96fb
-34
-+
+30
+-
 "i do not yet understand the purpose of the ""poke"" option, but i am determined to win!"

@@ -1,7 +1,7 @@
 60
 a428a1c5a00dae701742303ce9dcdf44
-30
--
+38
++
 """every window in alcatraz has a view of san <propfirst>."" (girl,interrupted,written by <propfemale> kaysen)"
 """[...] obiectia mea <propfemale> absurda.ceea ce n-o sa <propfemale> impiedice a ra<propfemale>ne ferm convins ca <propfemale> <propfemale><propfemale>i prea multa constiinta,dar orice constiinta reprezinta o calamitate."" (omul din subt<propfemale>na, de f.m. dostoievski)"
 """jesus doesn't want me for a sunbeam,sunbeams are never made like me."""
