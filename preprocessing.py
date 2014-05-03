@@ -21,7 +21,9 @@ def savedocs(folderpath):
 #	f.close()
 
 	stopwords = words(file('stopwordlist').read())
+	print 'saved stopwords'
 	vocab = words(file('words').read())
+	print 'saved vocabulary'
 
 	# saving acronym dictionary
 	acronyms = dict()
@@ -30,19 +32,24 @@ def savedocs(folderpath):
 		r = r.splitlines()
 		r = r[0].split(',')
 		acronyms[r[0]] = r[1]
+	print 'built acronym dictionary'
 
 	if folderpath:
 		for filename in os.listdir(folderpath):
 			filename = folderpath + '/' + filename
 			f = open(filename,'rb')
 			singledocs = list()
+			counter = 0
 			for r in f:
+				counter += 1
+				if counter < 5: continue
 				r = r.splitlines()
 				r = r[0].lower()
 				tokens = [word for sent in sent_tokenize(r) for word in word_tokenize(sent)]
 				singledocs.extend(tokens)
 			docs.append(singledocs)
 			f.close()
+		print 'saved corpus'
 
 	else:
 		print "enter folderpath"
@@ -56,6 +63,8 @@ def savedocs(folderpath):
 
 	# deleting stop words and tokens containing only punctuation
 	for i in range(0,len(docs)):
+
+		print 'processing file ',i
 		temp_doci = list()
 
 		for j in range(0,len(docs[i])):
