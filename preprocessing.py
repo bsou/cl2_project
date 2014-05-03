@@ -2,6 +2,8 @@
 # input - folderpath
 # output - variable docs
 
+from spellchecker import *
+
 def savedocs(folderpath):
 
 	from nltk.tokenize import word_tokenize,sent_tokenize
@@ -11,12 +13,15 @@ def savedocs(folderpath):
 	docs = list()
 
 	# getting stopwords
-	stopwords = list()
-	f = open('stopwordlist','rb')
-	for r in f:
-		r = r.splitlines()
-		stopwords.append(r[0])
-	f.close()
+#	stopwords = list()
+#	f = open('stopwordlist','rb')
+#	for r in f:
+#		r = r.splitlines()
+#		stopwords.append(r[0])
+#	f.close()
+
+	stopwords = words(file('stopwordlist').read())
+	vocab = words(file('words').read())
 
 	# saving acronym dictionary
 	acronyms = dict()
@@ -69,10 +74,26 @@ def savedocs(folderpath):
 				for k in range(2,len(docs[i][j])):
 					if not(docs[i][j][k] == docs[i][j][k-1] and docs[i][j][k] == docs[i][j][k-2]):
 						tempword += docs[i][j][k]
+				if tempword not in vocab: 
+					print tempword
+					tempword = correct(tempword)
+					print tempword
 				temp_doci.append(tempword)
-				print tempword
+			elif docs[i][j] not in vocab:
+				tempword = correct(docs[i][j])
+				print docs[i][j],tempword
+				temp_doci.append(tempword)
 			else: temp_doci.append(docs[i][j])
-		docs[i] = temp_doci
+
+		temp_dock = list()
+		for k in range(0,len(temp_doci)):
+
+			if temp_doci[k] in stopwords: continue
+			else: temp_dock.append(temp_doci[k])
+
+		docs[i] = temp_dock
+
+
 
 	print docs
 	return docs
