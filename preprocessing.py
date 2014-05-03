@@ -4,7 +4,7 @@
 
 from spellchecker import *
 
-def savedocs(folderpath):
+def savedocs(folderpath,start,end):
 
 	from nltk.tokenize import word_tokenize,sent_tokenize
 	import re
@@ -39,12 +39,18 @@ def savedocs(folderpath):
 
 	# regex for handling repeated characters in words like 'homeee'
 	q = re.compile(r"[a-z]*(\w)\1{2,}[a-z]*")
+
 	
 	if folderpath:
 		for filename in os.listdir(folderpath):
+
+			fmod = filename.split('.')
+			fmod = fmod[0].split('-')
+			fmod = int(fmod[1])
+			if fmod < start or fmod > end: continue
 		
-			filename = folderpath + '/' + filename
-			f = open(filename,'rb')	
+			filename_path = folderpath + '/' + filename
+			f = open(filename_path,'rb')	
 			print 'processing file:',filename
 
 			singledocs = list()
@@ -102,9 +108,11 @@ def main():
 	from optparse import OptionParser
 	parser = OptionParser()
 	parser.add_option("--folderpath",dest="folderpath",help="corpus folder path - where each document has a seperate file for it")
+	parser.add_option("--start",dest="start",type="int",help="start range of files")
+	parser.add_option("--end",dest="end",type="int",help="end range of files")
 	(options,args) = parser.parse_args()
 	
-	savedocs(options.folderpath)
+	savedocs(options.folderpath,options.start,options.end)
 
 if __name__ == "__main__":
 	main()
