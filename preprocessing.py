@@ -4,7 +4,7 @@
 
 from spellchecker import *
 
-def savedocs(folderpath,start,end):
+def savedocs(folderpath,start,end,outputfolder):
 
 	from nltk.tokenize import word_tokenize,sent_tokenize
 	import re
@@ -106,7 +106,7 @@ def savedocs(folderpath,start,end):
 
 			#print temp_doci
 
-			filename1 = 'processedstatusfiles/' + filename
+			filename1 = outputfolder + filename
 			fout = open(filename1,'wb')
 			for item in temp_doci:
   				fout.write("%s\n" % item)
@@ -126,9 +126,10 @@ def main():
 	parser.add_option("--folderpath",dest="folderpath",help="corpus folder path - where each document has a seperate file for it")
 	parser.add_option("--start",dest="start",type="int",help="start range of files")
 	parser.add_option("--end",dest="end",type="int",help="end range of files")
+	parser.add_option("--outputfolder",dest="outputfolder",help="output folder path")
 	(options,args) = parser.parse_args()
 	
-	savedocs(options.folderpath,options.start,options.end)
+	savedocs(options.folderpath,options.start,options.end,options.outputfolder)
 
 if __name__ == "__main__":
 	main()
