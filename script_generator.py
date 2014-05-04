@@ -1,4 +1,5 @@
 from optparse import OptionParser
+import math
 parser = OptionParser()
 #parser.add_option("--file",dest="folderpath",help="corpus folder path - where each document has a seperate file for it")
 parser.add_option("--start",dest="start",type="int",help="start range of files")
@@ -8,7 +9,7 @@ parser.add_option("--processors",dest="processors",type="int",help="range jump")
 
 s = options.start
 e = options.end
-j = (options.end-options.start)/options.processors
+j = int(math.ceil((options.end-options.start+1)/float(options.processors)))
 
 outputfilename = 'runpar2.sh'
 f = open(outputfilename,'wb')
