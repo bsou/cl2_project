@@ -67,13 +67,20 @@ def savedocs(folderpath,start,end):
 
 			for j in range(0,len(singledocs)):
 
-				if singledocs[j] in stopwords: continue
-				elif re.search('[a-zA-Z]',singledocs[j]) == None: continue
+				if singledocs[j] in stopwords:
+					#print 'stopword -',singledocs[j]
+					continue
+				elif re.search('[a-zA-Z]',singledocs[j]) == None:
+					#print 'not alphabets -',singledocs[j]
+					continue
 				elif singledocs[j] in acronyms:
 					tempstr = acronyms[singledocs[j]]
 					tempstr = word_tokenize(tempstr)
 					temp_doci.extend(tempstr)
-				elif p.match(singledocs[j]): temp_doci.append('laugh')
+					#print 'acronym',singledocs[j],'-',tempstr
+				elif p.match(singledocs[j]):
+					temp_doci.append('laugh')
+					#print 'laugh -',singledocs[j]
 				elif q.match(singledocs[j]):
 					tempword = singledocs[j][0] + singledocs[j][1]
 					for k in range(2,len(singledocs[j])):
@@ -81,20 +88,29 @@ def savedocs(folderpath,start,end):
 							tempword += singledocs[j][k]
 					if tempword not in vocab: tempword = correct(tempword)
 					temp_doci.append(tempword)
+					#print 'repeated chars -',singledocs[j],'-',tempword
 				elif singledocs[j] not in vocab:
 					tempword = correct(singledocs[j])
 					temp_doci.append(tempword)
-				else: temp_doci.append(singledocs[j])
+					#print 'not in vocab -',singledocs[j],'-',tempword
+				else:
+					temp_doci.append(singledocs[j])
+					#print 'in vocab -',singledocs[j]
+
+			#print temp_doci
 
 			temp_dock = list()
 			for k in range(0,len(temp_doci)):
 				if temp_doci[k] in stopwords: continue
 				else: temp_dock.append(temp_doci[k])
 
+			#print temp_doci
+
 			filename1 = 'processedstatusfiles/' + filename
 			fout = open(filename1,'wb')
-			for item in singledocs:
+			for item in temp_doci:
   				fout.write("%s\n" % item)
+			fout.close()
 
 			f.close()
 
