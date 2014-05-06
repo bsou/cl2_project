@@ -327,7 +327,7 @@ if __name__ == "__main__":
 
     print "Creating the topic model..."
     topic_model_feature = TopicModelFeature()
-    topic_model_feature = None
+    #topic_model_feature = None
     print "Creation of the topic model done"
 
     all_features, neu_labels = process_training_data(0, training_data, unigrams, bigrams, bag_of_words, bag_of_bigrams, topic_model_feature)
