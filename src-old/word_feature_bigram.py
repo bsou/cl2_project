@@ -220,7 +220,7 @@ if __name__ == "__main__":
     #print len(selected_unigrams), ', ', selected_unigrams
     #print ''
 
-    top_bigrams = fr.get_top_bigrams(1000)
+    top_bigrams = fr.get_top_bigrams(20)
     #print topBigrams
     # selected_bigrams = list()
     for bigram in top_bigrams:

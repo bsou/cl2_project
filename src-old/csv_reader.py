@@ -19,9 +19,9 @@ class CsvReader:
                 if is_testing_data:
                     num_of_cols -= 1
                 for col in range(0, num_of_cols):
-                    if col == constants.AUTHOR_ID_COL and not self.is_valid_author_id(row[col]):
-                        is_valid_row = False
-                        break
+                    #if col == constants.AUTHOR_ID_COL and not self.is_valid_author_id(row[col]):
+                    #    is_valid_row = False
+                    #    break
                     if col == constants.TIMESTAMP_COL and not self.is_valid_timestamp(row[col]):
                         is_valid_row = False
                         break
