@@ -216,7 +216,7 @@ if __name__ == "__main__":
         #print unigram, ': ', p
         if abs(p[0]) >= 0.1:
             #selected_unigrams.append(unigram)
-	    print unigram, ":', p
+	    print unigram, ":", p
     #print len(selected_unigrams), ', ', selected_unigrams
     #print ''
 
