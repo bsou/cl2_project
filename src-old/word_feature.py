@@ -209,14 +209,15 @@ if __name__ == "__main__":
 
     top_unigrams = fr.get_top_unigrams(6000)
     #print top_unigrams
-    selected_unigrams = list()
+    #selected_unigrams = list()
     for unigram in top_unigrams:
         w_counts = fr.get_feauture_by_unigram(unigram)
         p = pearsonr(w_counts, neus)
         #print unigram, ': ', p
         if abs(p[0]) >= 0.1:
-            selected_unigrams.append(unigram)
-    print len(selected_unigrams), ', ', selected_unigrams
+            #selected_unigrams.append(unigram)
+	    print unigram, ":', p
+    #print len(selected_unigrams), ', ', selected_unigrams
     #print ''
 
     # top_bigrams = fr.get_top_bigrams(20)
