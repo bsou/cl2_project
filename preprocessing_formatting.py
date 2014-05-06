@@ -44,7 +44,7 @@ def savedocs(folderpath,start,end,outputfolder):
 	if folderpath:
 
 		
-		filename1 = outputfolder + 'processedlabeledstatus.csv'
+		filename1 = outputfolder
 		fout = open(filename1,'wb')
 
 		for filename in os.listdir(folderpath):
