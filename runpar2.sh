@@ -21,4 +21,4 @@ python preprocessing.py --folderpath newunlabeledstatusfiles/ --start 9938 --end
 python preprocessing.py --folderpath newunlabeledstatusfiles/ --start 10461 --end 10983 --outputfolder processed_unlabeledstatusfiles/
 python preprocessing.py --folderpath newunlabeledstatusfiles/ --start 10984 --end 11506 --outputfolder processed_unlabeledstatusfiles/
 python preprocessing.py --folderpath newunlabeledstatusfiles/ --start 11507 --end 12029 --outputfolder processed_unlabeledstatusfiles/
-python preprocessing.py --folderpath newunlabeledstatusfiles/ --start 12030 --end 12540 --outputfolder processed_unlabeledstatusfiles/
+python preprocessing.py --folderpath newunlabeledstatusfiles/ --start 12030 --end 12539 --outputfolder processed_unlabeledstatusfiles/
