@@ -207,13 +207,13 @@ if __name__ == "__main__":
     # print len(avg_afinns), ' avg_afinns:', avg_afinns[0], ' ', avg_afinns[1], '...', avg_afinns[-1]
     # print 'average afinn feature: ', pearsonr(avg_afinns, neus)
 
-    top_unigrams = fr.get_top_unigrams(20)
+    top_unigrams = fr.get_top_unigrams(6000)
     #print top_unigrams
     selected_unigrams = list()
     for unigram in top_unigrams:
         w_counts = fr.get_feauture_by_unigram(unigram)
         p = pearsonr(w_counts, neus)
-        print unigram, ': ', p
+        #print unigram, ': ', p
         if abs(p[0]) >= 0.1:
             selected_unigrams.append(unigram)
     print len(selected_unigrams), ', ', selected_unigrams
