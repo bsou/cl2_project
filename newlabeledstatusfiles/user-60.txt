@@ -2,9 +2,10 @@
 a428a1c5a00dae701742303ce9dcdf44
 38
 +
-"""every window in alcatraz has a view of san <propfirst> "" (girl,interrupted,written by <propfemale> kaysen)"
-"""[   ] obiectia mea <propfemale> absurda ceea ce n-o sa <propfemale> impiedice a ra<propfemale>ne ferm convins ca <propfemale> <propfemale><propfemale>i prea multa constiinta,dar orice constiinta reprezinta o calamitate "" (omul din subt<propfemale>na, de f m  dostoievski)"
-"""jesus doesn't want me for a sunbeam,sunbeams are never made like me """
-"lelaina pierce: i was really going to be somebody by the time i was 23  <propfirst> dyer: <propfemale>, all you have to be by the time you're 23 is yourself "
-"lelaina pierce: i was really going to be somebody by the time i was 23  <propfirst> dyer: <propfemale>, all you have to be by the time you're 23 is yourself "
-"the meat was bruised, bleeding and imprisoned in a tight wrapping  and, though i had a six month respite from thinking about it, so was i  (girl,interrupted,written by <propfemale> kaysen)"
+1
+2010-12-08 21:04:04 """every window in alcatraz has a view of san <propfirst>."" (girl,interrupted,written by <propfemale> kaysen)"
+2011-01-23 18:16:50 """[...] obiectia mea <propfemale> absurda.ceea ce n-o sa <propfemale> impiedice a ra<propfemale>ne ferm convins ca <propfemale> <propfemale><propfemale>i prea multa constiinta,dar orice constiinta reprezinta o calamitate."" (omul din subt<propfemale>na, de f.m. dostoievski)"
+2011-03-01 20:36:04 """jesus doesn't want me for a sunbeam,sunbeams are never made like me."""
+2010-11-07 17:44:19 "lelaina pierce: i was really going to be somebody by the time i was 23. <propfirst> dyer: <propfemale>, all you have to be by the time you're 23 is yourself."
+2010-10-27 19:46:31 "lelaina pierce: i was really going to be somebody by the time i was 23. <propfirst> dyer: <propfemale>, all you have to be by the time you're 23 is yourself."
+2010-12-18 11:31:52 "the meat was bruised, bleeding and imprisoned in a tight wrapping. and, though i had a six month respite from thinking about it, so was i. (girl,interrupted,written by <propfemale> kaysen)"
