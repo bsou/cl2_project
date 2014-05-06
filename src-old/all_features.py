@@ -310,9 +310,9 @@ if __name__ == "__main__":
     use_time_slots = True
     use_gender = True
 
-    unigrams = read_unigrams_for_feature(600)
+    unigrams = read_unigrams_for_feature(126)
     print ">>", len(unigrams), 'unigram features:', unigrams
-    bigrams = read_bigrams_for_feature(100)
+    bigrams = read_bigrams_for_feature(33)
     print ">>", len(bigrams), 'bigram features:', bigrams
 
     bag_of_words = read_unigrams_for_feature(0)    # 84
@@ -326,18 +326,18 @@ if __name__ == "__main__":
     print "Training data loaded"
 
     print "Creating the topic model..."
-    #topic_model_feature = TopicModelFeature()
+    topic_model_feature = TopicModelFeature()
     topic_model_feature = None
     print "Creation of the topic model done"
 
     all_features, neu_labels = process_training_data(0, training_data, unigrams, bigrams, bag_of_words, bag_of_bigrams, topic_model_feature)
 
-    print "Testing data loading..."
-    test_data = CsvReader(constants.TEST_DATA_FILE, True)
-    print "Testing data loaded."
+    #print "Testing data loading..."
+    #test_data = CsvReader(constants.TEST_DATA_FILE, True)
+    #print "Testing data loaded."
 
-    features_test, neu_labels_not_used = process_training_data(0, test_data, unigrams, bigrams, bag_of_words, bag_of_bigrams, topic_model_feature, True)
-    author_ids_test = test_data.get_author_ids()
+    #features_test, neu_labels_not_used = process_training_data(0, test_data, unigrams, bigrams, bag_of_words, bag_of_bigrams, topic_model_feature, True)
+    #author_ids_test = test_data.get_author_ids()
 
     # print "Model training on training data..."
     # tm = TrainModel(all_features, neu_labels)

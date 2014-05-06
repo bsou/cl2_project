@@ -1,11 +1,11 @@
-TRAINING_DATA_FILE = '../dataset/training_unfiltered.csv'
+TRAINING_DATA_FILE = '../training.csv'
 TEST_DATA_FILE = '../dataset/test_unfiltered.csv'
 STOP_WORDS_FILE = '../dataset/stop_words.txt'
 SWEAR_WORDS_FILE = '../dataset/swear_words.txt'
 AFINN_FILE = '../dataset/AFINN-111.txt'
-UNIGRAM_FILE = '../dataset/unigrams_600_of_6000.txt'
-BIGRAM_FILE = '../dataset/bigrams_100_of_1000.txt'
-TOPIC_MODEL_FEATURES_FILE = '../dataset/output_doc_topics.txt'
+UNIGRAM_FILE = '../unigrams.txt'
+BIGRAM_FILE = '../bigrams.txt'
+TOPIC_MODEL_FEATURES_FILE = '../mallet/100/output_doc_topics.txt'
 
 #TIME_SLOTS = [(0, 6), (6, 11), (11, 16), (16, 21)]
 TIME_SLOTS = [(0, 2), (2, 4), (4, 6), (6, 8), (8, 10), (10, 12), (12, 14), (14, 16), (16, 18), (18, 20), (20, 22), (22, 0)]
