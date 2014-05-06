@@ -1,0 +1,1 @@
+ ~/Documents/Fall_2013/CL1/Project/mallet-2.0.7/bin/mallet train-topics --input dataset/mallet/100_newlabeledstatusfiles/topic-input.mallet --num-topics 100 --output-state dataset/mallet/newlabeledstatusfiles.state.gz --output-doc-topics dataset/mallet/newlabeledstatusfiles.topics --output-topic-keys dataset/mallet/100_newlabeledstatusfiles/topic_keys.txt
