@@ -91,7 +91,7 @@ def savedocs(folderpath,start,end,outputfolder):
 					#print 'repeated chars -',singledocs[j],'-',tempword
 				elif singledocs[j] not in vocab:
 					tempword = correct(singledocs[j])
-					temp_doci.append(tempword)
+					if tempword in vocab: temp_doci.append(tempword)
 					#print 'not in vocab -',singledocs[j],'-',tempword
 				else:
 					temp_doci.append(singledocs[j])
