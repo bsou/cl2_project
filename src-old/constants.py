@@ -1,5 +1,5 @@
-TRAINING_DATA_FILE = '../dataset/training_release_unfiltered.csv'
-TEST_DATA_FILE = '../dataset/test_release_unfiltered.csv'
+TRAINING_DATA_FILE = '../dataset/training_unfiltered.csv'
+TEST_DATA_FILE = '../dataset/test_unfiltered.csv'
 STOP_WORDS_FILE = '../dataset/stop_words.txt'
 SWEAR_WORDS_FILE = '../dataset/swear_words.txt'
 AFINN_FILE = '../dataset/AFINN-111.txt'

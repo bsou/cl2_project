@@ -26,7 +26,7 @@ from scipy.stats.stats import spearmanr
 def extract_gender(dataset, features):
     gender = {}
     for row in dataset.get_columns([constants.AUTHOR_ID_COL, constants.GENDER_COL]):
-        if row[0] not in gender:
+	if row[0] not in gender:
             gender[row[0]] = int(row[1])
 
     for one_author in features.keys():
@@ -310,9 +310,9 @@ if __name__ == "__main__":
     use_time_slots = True
     use_gender = True
 
-    unigrams = read_unigrams_for_feature(87)
+    unigrams = read_unigrams_for_feature(600)
     print ">>", len(unigrams), 'unigram features:', unigrams
-    bigrams = read_bigrams_for_feature(5)
+    bigrams = read_bigrams_for_feature(100)
     print ">>", len(bigrams), 'bigram features:', bigrams
 
     bag_of_words = read_unigrams_for_feature(0)    # 84
@@ -326,8 +326,8 @@ if __name__ == "__main__":
     print "Training data loaded"
 
     print "Creating the topic model..."
-    topic_model_feature = TopicModelFeature()
-    # topic_model_feature = None
+    #topic_model_feature = TopicModelFeature()
+    topic_model_feature = None
     print "Creation of the topic model done"
 
     all_features, neu_labels = process_training_data(0, training_data, unigrams, bigrams, bag_of_words, bag_of_bigrams, topic_model_feature)

@@ -28,6 +28,10 @@ class CsvReader:
                     if col == constants.STATUS_COL:
                         # row_data.append(row[col].lower())
                         row_data.append("\"" + row[col].lower().replace("\"", " ").replace("\'", " ") + "\"")
+		    if col == constants.GENDER_COL:
+			if row[col] == " ":
+				is_valid_row = False
+				break
                     else:
                         row_data.append(row[col])
                 if is_valid_row:

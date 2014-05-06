@@ -4,7 +4,7 @@ import pickle
 from collections import defaultdict
 from scipy.stats.stats import pearsonr
 from nltk.util import bigrams
-
+from csv_reader import CsvReader
 
 class WordFeature:
 
@@ -189,24 +189,26 @@ class WordFeature:
 
 
 if __name__ == "__main__":
-    fr = WordFeature("../dataset/training_release_unfiltered.csv", "../dataset/stop_words.txt", "../dataset/swear_words.txt")
-    author_ids = fr.get_author_list()
-    print len(author_ids), ' author ids ', author_ids[0], ' ... ', author_ids[-1], ' loaded: ', author_ids.index('2ab5dc09af49cf5114e60087919f1f3a')
-    neus = fr.get_nue_list()
-    print len(neus), ' neus ', neus[0], ' ... ', neus[-1]
-    author_statuses = fr.read_status_group_by_author()
-    print len(author_statuses), ' author statuses '     # , author_statuses[0], ' ... ', author_statuses[author_ids.index('2ab5dc09af49cf5114e60087919f1f3a')]
+    training_data = CsvReader(constants.TRAINING_DATA_FILE)
+    fr = WordFeature(training_data)
+    author_ids, neus = training_data.get_author_ids_and_neu_labels()
+    # author_ids = fr.get_author_list()
+    # print len(author_ids), ' author ids ', author_ids[0], ' ... ', author_ids[-1], ' loaded: ', author_ids.index('2ab5dc09af49cf5114e60087919f1f3a')
+    # neus = fr.get_nue_list()
+    # print len(neus), ' neus ', neus[0], ' ... ', neus[-1]
+    # author_statuses = fr.read_status_group_by_author()
+    # print len(author_statuses), ' author statuses '     # , author_statuses[0], ' ... ', author_statuses[author_ids.index('2ab5dc09af49cf5114e60087919f1f3a')]
 
-    avg_lens = fr.get_author_avg_lens()
-    print len(avg_lens), ' avg_lens:', avg_lens[0], ' ', avg_lens[1], '...', avg_lens[-1]
-    print 'average length feature: ', pearsonr(avg_lens, neus)
+    # avg_lens = fr.get_author_avg_lens()
+    # print len(avg_lens), ' avg_lens:', avg_lens[0], ' ', avg_lens[1], '...', avg_lens[-1]
+    # print 'average length feature: ', pearsonr(avg_lens, neus)
 
-    avg_afinns = fr.get_feature_by_afinn('../dataset/AFINN-111.txt')
-    print len(avg_afinns), ' avg_afinns:', avg_afinns[0], ' ', avg_afinns[1], '...', avg_afinns[-1]
-    print 'average afinn feature: ', pearsonr(avg_afinns, neus)
+    # avg_afinns = fr.get_feature_by_afinn('../dataset/AFINN-111.txt')
+    # print len(avg_afinns), ' avg_afinns:', avg_afinns[0], ' ', avg_afinns[1], '...', avg_afinns[-1]
+    # print 'average afinn feature: ', pearsonr(avg_afinns, neus)
 
     top_unigrams = fr.get_top_unigrams(20)
-    print top_unigrams
+    #print top_unigrams
     selected_unigrams = list()
     for unigram in top_unigrams:
         w_counts = fr.get_feauture_by_unigram(unigram)
@@ -215,14 +217,14 @@ if __name__ == "__main__":
         if abs(p[0]) >= 0.1:
             selected_unigrams.append(unigram)
     print len(selected_unigrams), ', ', selected_unigrams
-    print ''
+    #print ''
 
-    top_bigrams = fr.get_top_bigrams(20)
-    #print topBigrams
-    selected_bigrams = list()
-    for bigram in top_bigrams:
-        bg_counts = fr.get_feauture_by_bigram(bigram)
-        p = pearsonr(bg_counts, neus)
-        if abs(p[0]) >= 0.1:
-            selected_bigrams.append(bigram)
-    print len(selected_bigrams), ', ', selected_bigrams
+    # top_bigrams = fr.get_top_bigrams(20)
+    # #print topBigrams
+    # selected_bigrams = list()
+    # for bigram in top_bigrams:
+    #     bg_counts = fr.get_feauture_by_bigram(bigram)
+    #     p = pearsonr(bg_counts, neus)
+    #     if abs(p[0]) >= 0.1:
+    #         selected_bigrams.append(bigram)
+    # print len(selected_bigrams), ', ', selected_bigrams
