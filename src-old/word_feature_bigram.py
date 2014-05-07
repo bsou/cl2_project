@@ -220,7 +220,7 @@ if __name__ == "__main__":
     #print len(selected_unigrams), ', ', selected_unigrams
     #print ''
 
-    top_bigrams = fr.get_top_bigrams(20)
+    top_bigrams = fr.get_top_bigrams(1000)
     #print topBigrams
     # selected_bigrams = list()
     for bigram in top_bigrams:
@@ -228,5 +228,5 @@ if __name__ == "__main__":
         p = pearsonr(bg_counts, neus)
         if abs(p[0]) >= 0.1:
             #selected_bigrams.append(bigram)
-	    print bigram, ":", p
+	    print bigram[0], " ", bigram[1], ":", p
     # print len(selected_bigrams), ', ', selected_bigrams
