@@ -1,0 +1,15 @@
+%!TEX root = ramesh-aclws14.tex
+\section{Related Work}
+\label{sec:relatedwork}
+
+Prior work \cite{kuh,carini06} has studied the relationship between student engagement and academic performance for traditional classroom courses; they identify several metrics for user engagement (such as student-faculty interaction, level of academic challenge). Carini et al.\shortcite{carini06} demonstrate quantitatively that though most engagement metrics are positively correlated to performance, the relationships in many cases can be weak. Our work borrows ideas from \citeauthor{kuh} \shortcite{kuh}, \citeauthor{carini06} \shortcite{carini06}, and from statistical survival models \cite{richards:12} and adapts these to MOOC setting.
+
+Various works analyze student dropouts in MOOCs \cite{palade,clow:13,balakrishnan:13,diyi13}. Our work differs from these in that we analyze a combination of several factors that contribute to learner engagement and hence their survival in online courses. We argue that analyzing the ways in which students engage themselves in different phases of online courses can reveal information about factors that lead to their continuous survival. This will pave way for constructing better quality MOOCs, which will then result in increase in enrollment and \emph{student survival}. In this work, we analyze the different course-related activities and reason about important factors in determining learner survival at different points in the course.
+
+Student engagement is known to be a significant factor in success of student learning \cite{kuh}, but there is still limited work studying student engagement in MOOCs. Our work is closest to that of \citeauthor{kizilcec:13} \shortcite{kizilcec:13}, who attempt to understand learner disengagement in MOOCs. Based on three MOOCs, these authors identify four prototypical trajectories of engagement and describe the set of features for comparing the different trajectories. Their work clusters user trajectories and identifies them as engaged/disengaged based on cluster membership. Our work differs from the above work in that we view types of engagement as a latent variables and learn to differentiate among the engagement types from data. We use quiz-submission as a measure of \emph{learner survival} and use the learner survival scores to train the model. We then use this model to predict whether the learner submitted the final exam/assignments/quizzes in the course, i.e., whether the learner \emph{survived} the course. We model engagement explicitly and show that it helps in predicting learner survival.
+
+
+%already mentioned
+%MOOCs are fundamentally different from traditional courses in, e.g., the number of students enrolled, student-faculty interactions, methods of assessment, and lack of personal interaction. In this work, we identify metrics for learner engagement tailored for online courses and analyze how these engagement metrics relate to performance.
+
+ 
