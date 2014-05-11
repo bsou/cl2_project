@@ -9,7 +9,12 @@ class TopicModelFeature:
 		self._features = {}
 		for line in f.readlines():
 			words = line.split("\t")
-			author_id = words[1].split("/")[-1][:-4]
+			file_name = words[1].split("/")[-1]
+			author_id = ""
+			if(len(file_name) > 20):
+				author_id = file_name[:-4]
+			else:
+				author_id = file_name[5:-4]
 			words = words[2:]
 			topic_proportions = {}
 			it = iter(words)

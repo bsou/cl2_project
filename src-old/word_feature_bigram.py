@@ -228,5 +228,5 @@ if __name__ == "__main__":
         p = pearsonr(bg_counts, neus)
         if abs(p[0]) >= 0.1:
             #selected_bigrams.append(bigram)
-	    print bigram[0], " ", bigram[1], ":", p
+	    print bigram[0].strip(), " ", bigram[1].strip(), ":", p
     # print len(selected_bigrams), ', ', selected_bigrams

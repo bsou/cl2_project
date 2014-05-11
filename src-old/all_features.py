@@ -1,5 +1,5 @@
-unigram_capacity = 20
-bigram_capacity = 20
+unigram_capacity = 50
+bigram_capacity = 10
 
 use_nrc = True
 use_punctuation = True
@@ -223,8 +223,8 @@ def process_training_data(disk, training_data, unigrams, bigrams, bag_of_words, 
                 neu_labels[author_ids[idx]] = neus[idx]
 
         wf = WordFeature(training_data)
-        #unigrams = get_unigrams_for_feature(wf, neus, 30)
-        #bigrams = get_bigrams_for_feature(wf, neus, 10)
+        #unigrams = get_unigrams_for_feature(wf, neus, unigram_capacity)
+        #bigrams = get_bigrams_for_feature(wf, neus, bigram_capacity)
 
         print title, "data word features extracting..."
         extract_word_features(wf, all_features, author_ids, unigrams, bigrams)
@@ -310,9 +310,9 @@ if __name__ == "__main__":
     use_time_slots = True
     use_gender = True
 
-    unigrams = read_unigrams_for_feature(126)
+    unigrams = read_unigrams_for_feature(unigram_capacity)
     print ">>", len(unigrams), 'unigram features:', unigrams
-    bigrams = read_bigrams_for_feature(33)
+    bigrams = read_bigrams_for_feature(bigram_capacity)
     print ">>", len(bigrams), 'bigram features:', bigrams
 
     bag_of_words = read_unigrams_for_feature(0)    # 84
@@ -332,11 +332,11 @@ if __name__ == "__main__":
 
     all_features, neu_labels = process_training_data(0, training_data, unigrams, bigrams, bag_of_words, bag_of_bigrams, topic_model_feature)
 
-    #print "Testing data loading..."
-    #test_data = CsvReader(constants.TEST_DATA_FILE, True)
-    #print "Testing data loaded."
+    print "Testing data loading..."
+    test_data = CsvReader(constants.TEST_DATA_FILE, True)
+    print "Testing data loaded."
 
-    #features_test, neu_labels_not_used = process_training_data(0, test_data, unigrams, bigrams, bag_of_words, bag_of_bigrams, topic_model_feature, True)
+    features_test, neu_labels_not_used = process_training_data(0, test_data, unigrams, bigrams, bag_of_words, bag_of_bigrams, topic_model_feature, True)
     #author_ids_test = test_data.get_author_ids()
 
     # print "Model training on training data..."
