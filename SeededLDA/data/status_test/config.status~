@@ -1,0 +1,11 @@
+sSrcWordIndices /linqshomes/artir/Doctorate/projects/mooc/topic-models/SeededLDA/data/status/words.txt
+sSrcDocIndices /linqshomes/artir/Doctorate/projects/mooc/topic-models/SeededLDA/data/status/docs.txt
+sSrcWords /linqshomes/artir/Doctorate/projects/mooc/topic-models/SeededLDA/data/status/allwords.txt
+iNoTopics 10
+iNoIterations 100 
+dAlpha 1.0 
+dBeta 0.01
+dMu0 1e-7 
+dTau0 0.7 
+bAllowSeedTopics 1 
+sSeedTopicalWordsPath /linqshomes/artir/Doctorate/projects/mooc/topic-models/SeededLDA/data/status/seed.uniq.words.1
