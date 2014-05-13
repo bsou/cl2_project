@@ -2,6 +2,26 @@
 \section{Pre-processing}
 \label{sec:preprocessing}
 
+The data that was provided to us were Facebook status messages of users. Status messages posted in Facebook are inherently noisy and thus deserves careful processing. We list the various preprocessing techniques that we applied on the status data to get rid of the noise from it. 
+\begin{itemize}
+\item[(i)] {\bf Emoticons}: We replaced the emoticons using an emoticon dictionary that we constructed from~\cite{emoticondict}. For example, whenever we encountered any of these symbols \texttt{:-) :) :o) :] :3 :c) :> =] 8) =) (:}, we replaced it with the word {\bf smile}.
+\item[(ii)] {\bf Stopwords, Punctuations \& Numbers}: Stopwords, punctuations and alphanumeric characters from the status messages were removed as they do not carry much information on their own.
+\item[(iii)] {\bf Acronyms}: Short messages esp. the staus messages posted in Facebook tend to contain lots of acronyms like LOL meaning laugh out loud, ROFL meaning rolling on the floor laughing, etc. We construct an acronym dictionary and use it for replacing acronyms with their expanded versions.
+\item[(iv)] {\bf Expressions}: Expressions such as ``hahahahhahahahaha'', ``hehehehhehhehehhehehe'', ``yayyyyyyyyyyyy'' are very common across status messages in Facebook. The best way to deal with these words or expressions is to user regular expressions for detection of such patterns and replace them with words like {\bf laugh}, {\bf happy}, etc. Further words containing repeated characters (with 3 occurences or more) like ``happpppyyyyyyyy'' were reduced to {\bf happyy} as it is not common or perhaps impossible to have three consecutive occurences of the same letter in a word in English language. Therefore any such occurence were reduced to a sequence of two consecutive letters and then our spell-checker (described next) was applied on it to get the correct word.
+\item[(v)] {\bf Spelling correction}: For words not found in the vocabulary after applying the previous preprocessing steps, we correct them using a spell-checker that was built using ideas from~\cite{spellcheck}. Essentially, in the spell-checker we are trying to find the correction $c$, out of all possible corrections, that maximizes the probability of $c$ given the original incorrect word $w$:
+\begin{equation*}
+ \mbox{argmax}_c P(c|w)
+\end{equation*}
+which is equivalent to 
+\begin{equation*}
+\mbox{argmax}_c P(w|c) P(c)
+\end{equation*}
+Here $P(c)$ is the language model, which is the likelihood of occurrence of $c$ in an English text. We use an unigram model to calculate the probability of $c$ from the Brown corpus. To provide better estimates for $P(c)$, we could have used a bigram model here, however in that case we would probably require a ``status message'' corpus. Next, we need to figure out $P(w|c)$, the probability that $w$ would be typed in a text when the user meant $c$, which is the error model. Finally, we need to enumerate all feasible values of $c$ and then choose the one that gives the best combined probability score. 
+
+
+\end{itemize}
+
+
 
 
 
