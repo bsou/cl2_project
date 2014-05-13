@@ -1,2 +1,7 @@
 %!TEX root = cl2-project.tex
 \subsection{Word2Vec}
+
+Three approaches - \\ 
+1) Using just word representations which are pre-trained from Google news corpus. But as other groups mentioned, it's doesn't provide good results since the domain of the news corpus is very different from the facebook status data. \\
+2) Using word representations learnt from the 12k status data set. But won't work well as observed by other groups since skip gram model is a very simple model and thus needs a lot of data to train on. \\
+3) Idea - Initialize the model with pre-trained vectors from Google news corpus and then keep training with the facebook status data set. Should be helpful for the domain adaptation.
