@@ -18,6 +18,8 @@ which is equivalent to
 \end{equation*}
 Here $P(c)$ is the language model, which is the likelihood of occurrence of $c$ in an English text. We use an unigram model to calculate the probability of $c$ from the Brown corpus. To provide better estimates for $P(c)$, we could have used a bigram model here, however in that case we would probably require a ``status message'' corpus. Next, we need to figure out $P(w|c)$, the probability that $w$ would be typed in a text when the user meant $c$, which is the error model. Finally, we need to enumerate all feasible values of $c$ and then choose the one that gives the best combined probability score. 
 
+For enumerating all possible corrections $c$ of a given word $w$, we use the edit distance measure between two words. An edit here can be insertion, deletion, substitution and transposition (where the adjacent letters are swapped). We consider all those words which are within an edit distance of 2 from $w$ and choose the words $c$ which are in the vocabulary. For determining $P(w|c)$, the model that is assumed here is that all correct words within an edit distance of 1 are more probable than words which are within an edit distance of 2.
+
 
 \end{itemize}
 
