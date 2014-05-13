@@ -46,7 +46,10 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-In this work, we explore variations of topic-modeling in an attempt to understand depression symptoms and use that to predict depression. We propose a model drawing features from user behavior and topic modeling and demonstrate that use of language features helps in predicting risk of depression.
+In this work, we explore machine learning models which automatically learn representations of the data in an attempt to understand depression symptoms among Facebook users. Topic models, and recent models proposed in the field of deep neural networks, learn a representation of the data which has been shown to contain rich semantic information.
+%In this work, we explore variations of topic-modeling in an attempt to understand depression symptoms and use that to predict depression. 
+We propose a model for predicting depression among Facebook users using their status updates %drawing features from user behavior, topic modeling and distributed word representations learnt from neural networks, 
+and demonstrate how using these machine learning models help in gaining a deeper understanding of user behavior leading to better prediction results.
 \end{abstract}
 
 \input{introduction}
@@ -55,6 +58,8 @@ In this work, we explore variations of topic-modeling in an attempt to understan
 \input{pre-processing}
 \input{baseline}
 \input{seededlda}
+\input{slda_shlda}
+\input{word2vec}
 \input{results}
 \input{discussion}
 \bibliographystyle{acl}
