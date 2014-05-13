@@ -6,10 +6,82 @@ The  baseline system had the following features:
   \item Unigram and Bigram: Bag of words approach has been known to provide a significant feature set for many of the language modeling task. But we wanted to include only those words that were highly indicative of the label that we are trying to predict. For this, we first ranked the unigrams according to their frequency and took the top 6000 unigrams. Out of these, we selected those which correlated more than 0.1 as per Pearson's rank correlation with the label we are tring to predict. This gave us a total of 112 unigrams. We did a similar filtering for the bigrams and got a set of 38 bigrams. These 112 unigrams and 38 bigrams corresponded to a set of 150 features where each feature value was the count of that unigram (or bigram) present in the concatenated statuses of that user.
   \item Gender: Kenneth et.al [ref] studied that one of the potential risk factors for major depression is female sex. We included the gender as a binary feature.
   \item NRC word-emotion association lexicon: The lexicon is a list of English words and their associations with eight emotions (anger, fear, anticipation, trust, surprise, sadness, joy, and disgust). We included eight features corresponding to the eight emotions and the feature value for a particular emotion was the sum of the association measures of all the words in concatenated status with that emotion.
-  \item Time window:  We included 5 features  related to the time of the status update (1) frequency of status updates per day, (2) number of statuses posted between 6-11 am, (3) num- ber of statuses posted between 11-16, (4) number of sta- tuses posted between 16-21, (5) number of statuses posted between 21-00, and (6) number of statuses posted be- tween 00-6 am.
+  \item Time window:  We included 5 features  related to the time of the status update (1) frequency of status updates per day, (2) number of statuses posted between 6-11 am, (3) number of statuses posted between 11-16, (4) number of sta- tuses posted between 16-21, (5) number of statuses posted between 21-00, and (6) number of statuses posted be- tween 00-6 am.
   \item Topic modeling: We used vanilla LDA as implemented by the mallet toolkit. We concatenated all the statuses of a single user into one document. We need this for both the users in training dataset and the test dataset. We then ran the LDA on these documents to get a posterior topic distribution over 50 topics. This topic distribution was then used as 50 features in our model.
 \end{enumerate}
 \subsection{Seeded LDA}
+When we ran LDA on the Facebook statuses, we observed that words that can represent a similar disposition are spread across multiple topics.
+
+Observing the top topic terms output by LDA, we observe that there are some words that occur across topics causing the topic distribution values to get distributed across multiple topics. This way, no one topic gets a high score and this is not helpful in determining what topics are predictive of \textit{depression}. 
+
+Table \ref{table:ldawords} 
+
+\begin{table*} [ht!]
+%\begin{center}
+	\begin{tabular}{ l }
+
+{topic~1: smile, sad, laugh, wink, playful, love, day, crying, surprise, god, feel, movie, book, mood, woohoo, perfect, place, understand, super}\\
+{topic~2: happy, glad, excited, fun, energy, pleasant, love, awesome}\\
+{topic~3: love, life, heart, surprise, joyful, smile}\\
+{topic~4: unpleasant, unhappy, sad, irritated, hate, jealous, gloomy, disappointed }\\
+{topic~5: hate, awful, fuck, indecision, bored}\\
+
+    \end{tabular}
+      \caption{\noindent Seed words for \textit{SeededLDA}}
+        \label{table:ldawords_1}
+%\end{center}
+\end{table*}
+
+We observed that LDA on the Facebook statuses
+\begin{table*} [ht!]
+%\begin{center}
+	\begin{tabular}{ l }
+{topic~1: work, bad, tired, stress, time, cry, pain}\\
+{topic~2: happy, glad, excited, fun, energy, pleasant, love, awesome}\\
+{topic~3: love, life, heart, surprise, joyful, smile}\\
+{topic~4: unpleasant, unhappy, sad, irritated, hate, jealous, gloomy, disappointed }\\
+{topic~5: hate, awful, fuck, indecision, bored}\\
+    \end{tabular}
+      \caption{\noindent Seed words for \textit{SeededLDA}}
+        \label{table:seedwords_1}
+%\end{center}
+\end{table*}
+
+These two topics for instance demonstrate similar feeling and if the topic distribution for statuses get distributed across these two topics, we would not get a clear indication of what the underlying feeling of the user was when this was posted.
+Also, note that smile and sad occur in the same topic, so we cannot distinguish between these using the topic distribution.
+
+So, to mitigate this we try to use SeededLDA, to guide topic models to learn topics that are of specific interest to us.
+
+On examining some statuses and the top topic terms produced by LDA, we find that,
+
+words such as love, like, happy, playful, etc denote happiness and hence are not likely to correlate with depression.
+
+On the other hand, words such as hate, cry, disappointed, sad, unhappy, etc are likely to correlate with depression.
+
+Also words that represent work and related tension, such as stress, tired, time, busy, can correlate with depression symptoms.
+
+So, we seeded the topics with words that we think correlate with depression.
+
+--- work, stress, tired, ...
+--- happy, glad, excited, love, …
+--- sad, disappointed, hate, unhappy, …
+
+SeededLDA finds the words that are related to the seed words and places those words in the same topic. This helps because we don't need to identify all the words corresponding to depression and lack of depression. SeededLDA will gather these words as placing the related words in the same topic.
+
+SeededLDA parameters:
+
+Total 10 topic: 5 seeded topics, 5 regular topics
+Iterations: 500
+
+Top topic terms after running SeededLDA:
+
+--- happy, glad, pleased, love, life, energy, awesome, surprise, …
+--- sad, disappointed, hate, unhappy, dishearten, awful, lonely, hate, …
+
+\subsubsection{Seeded LDA with DSM Features}
+
+
+
 \subsection{SHLDA}
 \subsection{Word2Vec}
 \label{model}
