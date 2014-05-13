@@ -1,0 +1,77 @@
+%!TEX root = cl2-project.tex
+\subsection{Seeded LDA}
+\label{sec:seededlda}
+When we ran LDA on the Facebook statuses, we observed that words that can represent a similar disposition are spread across multiple topics.
+
+Observing the top topic terms output by LDA, we observe that there are some words that occur across topics causing the topic distribution values to get distributed across multiple topics. This way, no one topic gets a high score and this is not helpful in determining what topics are predictive of \textit{depression}. 
+
+Table \ref{table:ldawords_1} refers to the top topic words 
+
+\begin{table*} [ht!]
+%\begin{center}
+	\begin{tabular}{ l }
+\hline
+{topic~1: smile, sad, laugh, wink, playful, love, day, crying, surprise, god, feel, movie, book, mood}\\
+{topic~2: laugh, today, sad, feel, tired, people, sick, playful, school, miss, sleep, wait, stupid, hope, fun, kind, friend, bad}\\
+{topic~3: laugh, life, day, good, great, world, live, fall, hope, mind, end, days, peace, living, night, fear, change, full, sun}\\
+{topic~4: laugh, smile, run, love, vain, joke, ruin, night, party}\\
+\hline
+    \end{tabular}
+      \caption{\noindent Seed words for \textit{SeededLDA}}
+        \label{table:ldawords_1}
+%\end{center}
+\end{table*}
+
+We observed that LDA on the Facebook statuses
+\begin{table*} [ht!]
+%\begin{center}
+	\begin{tabular}{ l }
+{topic~1: work, bad, tired, stress, time, cry, pain}\\
+{topic~2: happy, glad, excited, fun, energy, pleasant, love, awesome}\\
+{topic~3: love, life, heart, surprise, joyful, smile}\\
+{topic~4: unpleasant, unhappy, sad, irritated, hate, jealous, gloomy, disappointed }\\
+{topic~5: hate, awful, fuck, indecision, bored}\\
+    \end{tabular}
+      \caption{\noindent Seed words for \textit{SeededLDA}}
+        \label{table:seedwords_1}
+%\end{center}
+\end{table*}
+
+These two topics for instance demonstrate similar feeling and if the topic distribution for statuses get distributed across these two topics, we would not get a clear indication of what the underlying feeling of the user was when this was posted.
+Also, note that smile and sad occur in the same topic, so we cannot distinguish between these using the topic distribution.
+
+So, to mitigate this we try to use SeededLDA, to guide topic models to learn topics that are of specific interest to us.
+
+On examining some statuses and the top topic terms produced by LDA, we find that,
+
+words such as love, like, happy, playful, etc denote happiness and hence are not likely to correlate with depression.
+
+On the other hand, words such as hate, cry, disappointed, sad, unhappy, etc are likely to correlate with depression.
+
+Also words that represent work and related tension, such as stress, tired, time, busy, can correlate with depression symptoms.
+
+So, we seeded the topics with words that we think correlate with depression.
+
+--- work, stress, tired, ...
+--- happy, glad, excited, love, …
+--- sad, disappointed, hate, unhappy, …
+
+SeededLDA finds the words that are related to the seed words and places those words in the same topic. This helps because we don't need to identify all the words corresponding to depression and lack of depression. SeededLDA will gather these words as placing the related words in the same topic.
+
+SeededLDA parameters:
+
+Total 10 topic: 5 seeded topics, 5 regular topics
+Iterations: 500
+
+Top topic terms after running SeededLDA:
+
+--- happy, glad, pleased, love, life, energy, awesome, surprise, …
+--- sad, disappointed, hate, unhappy, dishearten, awful, lonely, hate, …
+
+\subsubsection{Seeded LDA with DSM Features}
+
+
+
+\subsection{SHLDA}
+\subsection{Word2Vec}
+\label{model}

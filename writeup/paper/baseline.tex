@@ -1,0 +1,14 @@
+%!TEX root = cl2-project.tex
+\section{Baseline Model}
+\label{sec:baseline}
+
+\subsection{Baseline}
+The  baseline system had the following features:
+\begin{enumerate}
+  \item Unigram and Bigram: Bag of words approach has been known to provide a significant feature set for many of the language modeling task. But we wanted to include only those words that were highly indicative of the label that we are trying to predict. For this, we first ranked the unigrams according to their frequency and took the top 6000 unigrams. Out of these, we selected those which correlated more than 0.1 as per Pearson's rank correlation with the label we are tring to predict. This gave us a total of 112 unigrams. We did a similar filtering for the bigrams and got a set of 38 bigrams. These 112 unigrams and 38 bigrams corresponded to a set of 150 features where each feature value was the count of that unigram (or bigram) present in the concatenated statuses of that user.
+  \item Gender: Kenneth et.al [ref] studied that one of the potential risk factors for major depression is female sex. We included the gender as a binary feature.
+  \item NRC word-emotion association lexicon: The lexicon is a list of English words and their associations with eight emotions (anger, fear, anticipation, trust, surprise, sadness, joy, and disgust). We included eight features corresponding to the eight emotions and the feature value for a particular emotion was the sum of the association measures of all the words in concatenated status with that emotion.
+  \item Time window:  We included 5 features  related to the time of the status update (1) frequency of status updates per day, (2) number of statuses posted between 6-11 am, (3) number of statuses posted between 11-16, (4) number of sta- tuses posted between 16-21, (5) number of statuses posted between 21-00, and (6) number of statuses posted be- tween 00-6 am.
+  \item Topic modeling: We used vanilla LDA as implemented by the mallet toolkit. We concatenated all the statuses of a single user into one document. We need this for both the users in training dataset and the test dataset. We then ran the LDA on these documents to get a posterior topic distribution over 50 topics. This topic distribution was then used as 50 features in our model.
+\end{enumerate}
+
