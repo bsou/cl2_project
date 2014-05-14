@@ -3,4 +3,64 @@
 \section{Empirical Evaluation}
 \label{sec:experiments}
 
+--- Explanation of Models, what went into them\\
+--- Tools- weka \\
+--- parameters in weka --- naive bayes, crossvalidation 10-fold, smote, \\
+--- filtered features, why and how. a table that gives most correlated features ---- infoGain attribute evaluation on weka\\
+--- top questions, and features correlated with questions\\
+--- graphs for correlated features
+
+
+
+
+\begin{table} [ht]
+\begin{tabular}{lcccc}
+\toprule
+Models & Precision & Recall & \textit{F1-crossvalidation} & \textit{F1-test}  \\
+\midrule
+Baseline (B) & 0.7393 & 0.5462 & 0.6673 & 0.5815 \\
+B + LDA & \textbf{0.7492} & \textbf{0.5748} & \textbf{0.6923} & \textbf{0.6033} \\
+\textit{B + SeededLDA} & \textbf{0.7492} & \textbf{0.5748} & \textbf{0.6923} & \textbf{0.6033} \\
+\textit{B + $SeededLDA_{DSM}$} & \textbf{0.7492} & \textbf{0.5748} & \textbf{0.6923} & \textbf{0.6033} \\
+\textit{Filtered Feature Set} & \textbf{0.7492} & \textbf{0.5748} & \textbf{0.6923} & \textbf{0.6033} \\
+\textit{Regression + Threshold} & \textbf{0.7492} & \textbf{0.5748} & \textbf{0.6923} & \textbf{0.6033} \\
+\textit{SLDA } & \textbf{0.7492} & \textbf{0.5748} & \textbf{0.6923} & \textbf{0.6033} \\
+\bottomrule
+\end{tabular}
+\caption{Performance}
+\label{table:results_1}
+\end{table}
+
+
+\begin{table} [ht]
+\begin{tabular}{lcccc}
+\toprule
+Models & Precision & Recall & \textit{F1-crossvalidation} & \textit{F1-test}  \\
+\midrule
+\textit{Filter-5} & \textbf{0.7492} & \textbf{0.5748} & \textbf{0.6923} & \textbf{0.6033} \\
+\textit{Filter-10} & \textbf{0.7492} & \textbf{0.5748} & \textbf{0.6923} & \textbf{0.6033} \\
+\bottomrule
+\end{tabular}
+\caption{Performance of question based filtering models}
+\label{table:results_2}
+\end{table}
+
+\begin{table} [ht]
+\begin{tabular}{lcccc}
+\toprule
+Models & Precision & Recall & \textit{F1-crossvalidation} & \textit{F1-test}  \\
+\midrule
+\textit{Regression Threshold = 33 } & \textbf{0.7492} & \textbf{0.5748} & \textbf{0.6923} & \textbf{0.6033} \\
+\textit{Regression Threshold = 28 } & \textbf{0.7492} & \textbf{0.5748} & \textbf{0.6923} & \textbf{0.6033} \\
+\textit{Regression Threshold = 26 } & \textbf{0.7492} & \textbf{0.5748} & \textbf{0.6923} & \textbf{0.6033} \\
+\bottomrule
+\end{tabular}
+\caption{Performance of regression models}
+\label{table:results_2}
+\end{table}
+
+
+
+
+
 

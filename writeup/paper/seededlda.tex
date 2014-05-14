@@ -60,11 +60,28 @@ We observed that LDA on the Facebook statuses
 
 \subsubsection{Seeded LDA with DSM Features}
 
-We further experimented with seed words from DSM-IV manual. On page ... of the manual, there is instructions for determining if a person is suffering from a risk of depression. These instructions specify symptoms that are observed in depressed patients. An excerpt of the manual is given in Table \ref{} for the sake of convenience. 
+We further experimented with seed words from DSM-IV manual. On page 327 of the manual, there is instructions for determining if a person is suffering from a risk of a major depressive episode. These instructions specify symptoms that are observed in depressed patients. We draw words from the instructions and encode them as seeds in the our \textit{SeededLDA} model.
 
+\begin{table*} [ht!]
+%\begin{center}
+	\begin{tabular}{ l }
+	\hline
+{topic~1: depressed, sad, tear, cry, irritable, irritated, unhappy, gloomy, disappointed, annoyed, disturb}\\
+{topic~2: bored, interest, uninterested, disinterested, displeasure, hate, dislike}\\
+{topic~3: weight, gain, loss, appetite, hungry, eat}\\
+{topic~4: sleep, insomnia, cant, awake, wake }\\
+{topic~5: restless, anxious, worried, tense, fear, tension, worry}\\
+{topic~6: work, pressure, tired, fatigue, stress, time}\\
+{topic~6: guilty, guilt, useless, bad, waste}\\
+{topic~6: concentrate, think, indecisive, understand, follow, difficult, hard, indecision}\\
+{topic~6: die, death, suicide, attempt, live, end, dies}\\
+{topic~6: happy, glad, excited, fun, energy, pleasant, love, awesome, heart, surprise, joyful, smile}\\
+\hline
+    \end{tabular}
+      \caption{\noindent Seed words for \textit{SeededLDA} using DSM-IV}
+        \label{table:seedwords_1}
+%\end{center}
+\end{table*}
 
+In Section \ref{sec:results}, we discuss the effect of inclusion of \textit{SeededLDA} features in our model. We also rank features using \textit{Pearson} correlation coefficient with the target variable and we find that some of the \textit{SeededLDA} features correlate with the target variable resonating our belief that use of some specific words in Facebook status is indicative of \textit{depression}.
 
-
-\subsection{SHLDA}
-\subsection{Word2Vec}
-\label{model}

@@ -1,3 +1,7 @@
 %!TEX root = cl2-project.tex
 \section{Problem Statement}
 \label{sec:problem}
+
+
+In this work, we are working with data collected from a Facebook app called \textit{MyPersonality}. The \textit{MyPersonality} project is an app which presents users invoking the app with a questionnaire for assessing personality, emotional stability, depression. When people participated in the questionnaire, they also allowed the app to access their Facebook statuses. In this work, we concentrate on the depression questionnaire. The data hence, consists of Facebook statuses and a score upon completion of the depression questionnaire. The score sums up all the responses to the questions and a threshold on the final score is chosen to label the participants with a risk of depression. 
+We treat this as a supervised classification task, using the label given by the \textit{MyPersonality} dataset. We construct two types of features --- 1) surface level features such as gender, unigram and bigram features from Facebook statuses, time of day the post was made,  and 2) language features, for which we explore some variants of \textit{LDA}. Using the features we construct models for predicting depression.
