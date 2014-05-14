@@ -9,8 +9,10 @@
 --- filtered features, why and how. a table that gives most correlated features ---- infoGain attribute evaluation on weka\\
 --- top questions, and features correlated with questions\\
 --- graphs for correlated features
+\subsection{Depression Prediction Models}
 
-subsection{Feature Selection}
+
+\subsection{Feature Selection}
 
 Out of all the features that we extracted, we should be able to figure out good features from the set of features that help us to predict the set of depressed users better. The method that we adopt here is to choose the set of questions from 20 questions which are indicative of the depressed state of the user. For example, if a particular question has been selected to be indicative of depression, then a depressed user is more likely to give a score of 3 to this question. We describe the procedure of selecting these questions later. Thereafter, we compute the Pearson correlation coefficient ($\rho$) between a feature vector (FV) and the question-answer (QA) vector along with the corresponding $p$-value. A QA vector contains the answers for a given question for all the users. If there are $m$ feature vectors and $n$ QA vectors, then we get an $m\times n$ matrix, where each cell of the matrix is a $(\rho, p)$ tuple. We keep those tuples in the matrix which are above a certain threshold. This ensures that we have pairs of vectors having given $\rho$ value with high confidence. Next, we find the average of the remaining $\rho$ values for a FV to get $\rho_{avg}$. Finally, we sort the feature vectors in a non-increasing order by their $\rho_{avg}$, which gives us the most relevant feature vectors to work with.
 
