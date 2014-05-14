@@ -10,6 +10,12 @@
 --- top questions, and features correlated with questions\\
 --- graphs for correlated features
 
+subsection{Feature Selection}
+
+Out of all the features that we extracted, we should be able to figure out good features from the set of features that help us to predict the set of depressed users better. The method that we adopt here is to choose the set of questions from 20 questions which are indicative of the depressed state of the user. For example, if a particular question has been selected to be indicative of depression, then a depressed user is more likely to give a score of 3 to this question. We describe the procedure of selecting these questions later. Thereafter, we compute the Pearson correlation coefficient ($\rho$) between a feature vector (FV) and the question-answer (QA) vector along with the corresponding $p$-value. A QA vector contains the answers for a given question for all the users. If there are $m$ feature vectors and $n$ QA vectors, then we get an $m\times n$ matrix, where each cell of the matrix is a $(\rho, p)$ tuple. We keep those tuples in the matrix which are above a certain threshold. This ensures that we have pairs of vectors having given $\rho$ value with high confidence. Next, we find the average of the remaining $\rho$ values for a FV to get $\rho_{avg}$. Finally, we sort the feature vectors in a non-increasing order by their $\rho_{avg}$, which gives us the most relevant feature vectors to work with.
+
+The question selection process is as follows: Every question has 4 options (denoted by A0, A1, A2 and A3) and can be answered with a value from 0-3, with the higher value indicative of depressed state of a user. For each question, we aggregate the counts for each possible answer. For example, say we consider answers of 10 users for Question 1; and we find that A0 has count 2, A1 has count 1, A2 has count 3 and A4 has count 4. Since we are trying to identify questions which are indicative of the depressed state of a user, we add up the counts for A2 and A3, and sort the questions in a non-increasing order. We take the top-5 questions for top-25 depressed users and then repeat this procedure for top-50 users, top-100 and top-150 users. Finally, we choose the questions based on the number of times it occurred in the four sets. Essentially, the idea here is to choose the questions which has consistently maintained the top spot in the ordering.
+
 
 
 
