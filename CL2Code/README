@@ -23,10 +23,18 @@ Pre-processing:
 
 Word2vec (using gensim):
 
-python using_gensim.py 
+	python using_gensim.py 
+
+Extracting feature set for train and test data (this will create arff files) 
+
+	python all_features.py
+
+Running cross validation and prediction
+
+	Load the arff files into weka and select NaiveBayes classifier 
 
 
-Feature selection:
+Feature fitering:
 1. Generate the QA vectors:
 	- invoke SortList() in ProcessData.java
 

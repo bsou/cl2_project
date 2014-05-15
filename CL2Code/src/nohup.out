@@ -1,0 +1,11 @@
+>> 112 unigram features: ['people', 'feel', 'person', 'stop', 'wan', 'lost', 'amazing', 'baby', 'girl', 'true', 'understand', 'forever', 'hurt', 'forget', 'profile', 'knew', 'truth', 'ill', 'stuck', 'fight', 'broken', 'cute', 'strong', 'speak', 'trust', 'step', 'shut', 'count', 'lonely', 'swear', 'color', 'meant', 'fix', 'relationship', 'confused', 'chat', 'sexy', 'deserve', 'aint', 'attack', 'ugly', 'purple', 'wide', 'judge', 'wanting', 'forgive', 'freak', 'treat', 'rainbow', 'hurry', 'poke', 'ninja', 'disease', 'bibber', 'randomly', 'refuse', 'potatoes', 'bleeding', 'dangerous', 'forgetting', 'hyper', 'flower', 'proof', 'inspiration', 'highly', 'ego', 'relief', 'numb', 'cheat', 'grandparent', 'target', 'bullet', 'worrying', 'sword', 'disappointment', 'shaking', 'bump', 'sensitive', 'cage', 'exception', 'counter', 'puzzle', 'hiccup', 'spite', 'sherlock', 'native', 'adductive', 'bond', 'gaming', 'sucking', 'frost', 'hoodie', 'squeeze', 'pounding', 'hernia', 'abyss', 'jealousy', 'conscience', 'bonding', 'agony', 'yees', 'lipstick', 'uncertainty', 'react', 'sie', 'nan', 'urs', 'sublime', 'downside', 'neurotic', 'evanescence', 'vile']
+>> 38 bigram features: [('total', 'invalid'), ('wan', 'na'), ('laugh', 'love'), ('na', 'go'), ('smile', 'love'), ('give', 'up'), ('know', 'laugh'), ('time', 'laugh'), ('smile', 'laugh'), ('make', 'laugh'), ('going', 'back'), ('shut', 'up'), ('see', 'people'), ('never', 'know'), ('very', 'much'), ('laugh', 'much'), ('laugh', 'think'), ('grow', 'up'), ('fun', 'laugh'), ('laugh', 'still'), ('laugh', 'never'), ('always', 'laugh'), ('laugh', 'feel'), ('fun', 'smile'), ('being', 'laugh'), ('life', 'love'), ('love', 'people'), ('sad', 'laugh'), ('walk', 'away'), ('people', 'rate'), ('finally', 'finished'), ('early', 'morning'), ('people', 'really'), ('hurry', 'up'), ('amazing', 'laugh'), ('know', 'smile'), ('laugh', 'finally'), ('laugh', 'baby')]
+>> a bag of words of size  0 : []
+>> a bag of bigrams of size  0 : []
+Testing data loading...
+total invalid rows:  0  out of  49918
+Testing data loaded.
+Traceback (most recent call last):
+  File "all_features_testdata.py", line 339, in <module>
+    features_test, neu_labels_not_used = process_training_data(0, test_data, unigrams, bigrams, bag_of_words, bag_of_bigrams, topic_model_feature, True)
+NameError: name 'topic_model_feature' is not defined

@@ -1,0 +1,1 @@
+~/Documents/Fall_2013/CL1/Project/mallet-2.0.7/bin/mallet train-topics --input 50/topic-input.mallet --num-topics 50 --output-state 50/topic-state.gz --output-doc-topics 50/output_doc_topics.txt --output-topic-keys 50/topic_keys.txt
