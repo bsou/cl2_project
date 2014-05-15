@@ -1,0 +1,41 @@
+Pre-processing:
+1. Extracting the user information along with their status messages and storing
+   them in separate files labeled by user-id.txt:
+	- execute main() method in ProcessData.java
+	- for labeled data: readStatusFile()
+	- for unlabeled data: readUnlabStatusFile()
+
+2. Emoticon processing:
+	- execute main() method in ProcessEmoticon.java
+
+3. Removing . and / for enhancing the tokenizing process
+	- deletechar.sh
+
+3. Processing 
+	a. stop word removal 
+	b. punctuation removal
+	c. acronym expansion
+	d. "happyyyyyy" to "happyy" and then spell-check
+	e. mapping "hahahahhhahahah", "hehehehehehee" to laugh
+
+	- python preprocessing.py --help
+
+
+Word2vec (using gensim):
+
+python using_gensim.py 
+
+
+Feature selection:
+1. Generate the QA vectors:
+	- invoke SortList() in ProcessData.java
+
+2. Get the features with their respective Pearson correlation coefficients:
+	- python findCorr.py > pccmat.features
+
+3. Sort the features in descending order:
+	- sort -t $',' -k2,2rn pccmat.features > sorted.pccmat.features
+
+
+
+
