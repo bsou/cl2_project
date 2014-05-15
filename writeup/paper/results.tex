@@ -3,13 +3,6 @@
 \section{Empirical Evaluation}
 \label{sec:experiments}
 
---- Explanation of Models, what went into them\\
---- Tools- weka \\
---- parameters in weka --- naive bayes, crossvalidation 10-fold, smote, \\
---- filtered features, why and how. a table that gives most correlated features ---- infoGain attribute evaluation on weka\\
---- top questions, and features correlated with questions\\
---- graphs for correlated features
-
 We conduct experiments to understand how well our models are doing in predicting depression in Facebook users. We also try a filtering of models based on correlation with the questionnaire, this is described in detail in the \ref{sec:featuresel}.
 \subsection{Depression Prediction Models}
 
@@ -59,10 +52,7 @@ Out of all the features that we extracted, we should be able to figure out good 
 
 The question selection process is as follows: Every question has 4 options (denoted by A0, A1, A2 and A3) and can be answered with a value from 0-3, with the higher value indicative of depressed state of a user. For each question, we aggregate the counts for each possible answer. For example, say we consider answers of 10 users for Question 1; and we find that A0 has count 2, A1 has count 1, A2 has count 3 and A4 has count 4. Since we are trying to identify questions which are indicative of the depressed state of a user, we add up the counts for A2 and A3, and sort the questions in a non-increasing order. We take the top-5 questions for top-25 depressed users and then repeat this procedure for top-50 users, top-100 and top-150 users. Finally, we choose the questions based on the number of times it occurred in the four sets. Essentially, the idea here is to choose the questions which has consistently maintained the top spot in the ordering.
 
-
-
-
-
+We filter the features based on the pearson correlation values, removing the ones with \textit{zero} values of correlation with the questions in questionnaire. We have a total of 175 features in the original models mentioned above. Upon removing the features with \textit{zero} correlation, we reduce the number of features to 142. \textit{Filter-142} in table \ref{table:results_3} refers to the model with top 142 features. \textit{Filter-20} refers to the model with just top 20 features selected.
 
 
 \begin{table} [ht]
@@ -75,7 +65,7 @@ Models & Precision & Recall & \textit{F1-crossvalidation} & \textit{F1-test}  \\
 \bottomrule
 \end{tabular}
 \caption{Performance of question based filtering models}
-\label{table:results_2}
+\label{table:results_3}
 \end{table}
 
 
