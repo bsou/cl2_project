@@ -9,11 +9,52 @@
 --- filtered features, why and how. a table that gives most correlated features ---- infoGain attribute evaluation on weka\\
 --- top questions, and features correlated with questions\\
 --- graphs for correlated features
+
+We conduct experiments to understand how well our models are doing in predicting depression in Facebook users. We also try a filtering of models based on correlation with the questionnaire, this is described in detail in the \ref{sec:featuresel}.
 \subsection{Depression Prediction Models}
 
+Using the features described in Section \ref{sec:features}, we construct models for predicting depression. We first construct a model just incorporating the \textit{surface} features. We name this model \textit{Surface} in our experiments. We now incrementally add feature to this \textit{surface} set of features. We add LDA topic distribution as features to the \textit{surface} features to get the \textit{Surface + LDA} model. We replace our LDA features with \textit{SeededLDA} and \textit{SeededLDA-{DSM}} topic distribution values respectively, to get the \textit{Surface + SeededLDA} and \textit{Surface + SeededLDA-DSM} models. 
 
+\subsection{Experimental Setup}
+
+We use Weka \cite{weka} for our experiments. We try different classification models in Weka---1) Naive Bayes, 2) LibSVM, 3) SMO, and 4) BayesNet. In our experiments, we observe that Naive Bayes gives us the best score on the crossvalidation and test sets, hence, we report the scores from Naive Bayes in \ref{table:results_1}. We use a 10-fold crossvalidation for our experiments. We used \textit{Synthetic Minority Oversampling Technique} (\textit{SMOTE}) in Weka to leaven out the class imbalance in the dataset for the depression labels.
+
+Table \ref{table:results_1} gives the results of the models described above. We notice that  \textit{Surface + SeededLDA-DSM} gives us the best F-1 score of 0.431 on the test set.
+
+In addition to classifiers, we also experimented using regression model and used a threshold to classify the users as depressed or not depressed. We trained the models on the CESD scores. We tried a threshold between 25 - 35 and found that a threshold of 28 worked best on the crossvalidation set. We report the F-1 score on the test set with \textit{Linear Regression} with a threshold of 28 in Table \ref{table:results_2}. 
+
+
+\begin{table} [ht!]
+\begin{tabular}{lcccc}
+\toprule
+Models & Precision & Recall & \textit{F1-crossvalidation} & \textit{F1-test}  \\
+\midrule
+Surface (Baseline) & 0.436 & 0.417 & 0.426 &  0.407\\
+Surface + LDA & 0.43 & 0.417 & 0.424 &  0.418 \\
+\textit{Surface + SeededLDA} &  0.444&  0.417& 0.43 &  \\
+\textit{Surface + SeededLDA-{DSM}} & 0.439 & 0.423 & 0.431 & 0.432 \\
+\textit{SLDA } & 0.436 & 0.417 & 0.426 &  \\
+\bottomrule
+\end{tabular}
+\caption{Performance of classification models on crossvalidation and test sets}
+\label{table:results_1}
+
+\end{table}
+\begin{table} [ht!]
+\begin{tabular}{lcccc}
+\toprule
+Models & \textit{F1-test}  \\
+\midrule
+\textit{Regression Threshold = 28 } & 0.412 \\
+\bottomrule
+\end{tabular}
+\caption{Performance of \textit{Linear Regression +Threshold}}
+\label{table:results_2}
+\end{table}
+
+ 
 \subsection{Feature Selection}
-
+\label{sec:featuresel}
 Out of all the features that we extracted, we should be able to figure out good features from the set of features that help us to predict the set of depressed users better. The method that we adopt here is to choose the set of questions from 20 questions which are indicative of the depressed state of the user. For example, if a particular question has been selected to be indicative of depression, then a depressed user is more likely to give a score of 3 to this question. We describe the procedure of selecting these questions later. Thereafter, we compute the Pearson correlation coefficient ($\rho$) between a feature vector (FV) and the question-answer (QA) vector along with the corresponding $p$-value. A QA vector contains the answers for a given question for all the users. If there are $m$ feature vectors and $n$ QA vectors, then we get an $m\times n$ matrix, where each cell of the matrix is a $(\rho, p)$ tuple. We keep those tuples in the matrix which are above a certain threshold. This ensures that we have pairs of vectors having given $\rho$ value with high confidence. Next, we find the average of the remaining $\rho$ values for a FV to get $\rho_{avg}$. Finally, we sort the feature vectors in a non-increasing order by their $\rho_{avg}$, which gives us the most relevant feature vectors to work with.
 
 The question selection process is as follows: Every question has 4 options (denoted by A0, A1, A2 and A3) and can be answered with a value from 0-3, with the higher value indicative of depressed state of a user. For each question, we aggregate the counts for each possible answer. For example, say we consider answers of 10 users for Question 1; and we find that A0 has count 2, A1 has count 1, A2 has count 3 and A4 has count 4. Since we are trying to identify questions which are indicative of the depressed state of a user, we add up the counts for A2 and A3, and sort the questions in a non-increasing order. We take the top-5 questions for top-25 depressed users and then repeat this procedure for top-50 users, top-100 and top-150 users. Finally, we choose the questions based on the number of times it occurred in the four sets. Essentially, the idea here is to choose the questions which has consistently maintained the top spot in the ordering.
@@ -21,23 +62,7 @@ The question selection process is as follows: Every question has 4 options (deno
 
 
 
-\begin{table} [ht]
-\begin{tabular}{lcccc}
-\toprule
-Models & Precision & Recall & \textit{F1-crossvalidation} & \textit{F1-test}  \\
-\midrule
-Baseline (B) & 0.7393 & 0.5462 & 0.6673 & 0.5815 \\
-B + LDA & \textbf{0.7492} & \textbf{0.5748} & \textbf{0.6923} & \textbf{0.6033} \\
-\textit{B + SeededLDA} & \textbf{0.7492} & \textbf{0.5748} & \textbf{0.6923} & \textbf{0.6033} \\
-\textit{B + $SeededLDA_{DSM}$} & \textbf{0.7492} & \textbf{0.5748} & \textbf{0.6923} & \textbf{0.6033} \\
-\textit{Filtered Feature Set} & \textbf{0.7492} & \textbf{0.5748} & \textbf{0.6923} & \textbf{0.6033} \\
-\textit{Regression + Threshold} & \textbf{0.7492} & \textbf{0.5748} & \textbf{0.6923} & \textbf{0.6033} \\
-\textit{SLDA } & \textbf{0.7492} & \textbf{0.5748} & \textbf{0.6923} & \textbf{0.6033} \\
-\bottomrule
-\end{tabular}
-\caption{Performance}
-\label{table:results_1}
-\end{table}
+
 
 
 \begin{table} [ht]
@@ -45,27 +70,15 @@ B + LDA & \textbf{0.7492} & \textbf{0.5748} & \textbf{0.6923} & \textbf{0.6033} 
 \toprule
 Models & Precision & Recall & \textit{F1-crossvalidation} & \textit{F1-test}  \\
 \midrule
-\textit{Filter-5} & \textbf{0.7492} & \textbf{0.5748} & \textbf{0.6923} & \textbf{0.6033} \\
-\textit{Filter-10} & \textbf{0.7492} & \textbf{0.5748} & \textbf{0.6923} & \textbf{0.6033} \\
+\textit{Filter-142} & 0.445 & 0.399 & 0.421 &  \\
+\textit{Filter-20} & 0.387 & 0.325 & 0.353 &  \\
 \bottomrule
 \end{tabular}
 \caption{Performance of question based filtering models}
 \label{table:results_2}
 \end{table}
 
-\begin{table} [ht]
-\begin{tabular}{lcccc}
-\toprule
-Models & Precision & Recall & \textit{F1-crossvalidation} & \textit{F1-test}  \\
-\midrule
-\textit{Regression Threshold = 33 } & \textbf{0.7492} & \textbf{0.5748} & \textbf{0.6923} & \textbf{0.6033} \\
-\textit{Regression Threshold = 28 } & \textbf{0.7492} & \textbf{0.5748} & \textbf{0.6923} & \textbf{0.6033} \\
-\textit{Regression Threshold = 26 } & \textbf{0.7492} & \textbf{0.5748} & \textbf{0.6923} & \textbf{0.6033} \\
-\bottomrule
-\end{tabular}
-\caption{Performance of regression models}
-\label{table:results_2}
-\end{table}
+
 
 
 

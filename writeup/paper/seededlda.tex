@@ -1,7 +1,6 @@
 %!TEX root = cl2-project.tex
 \subsection{Seeded LDA}
 \label{sec:seededlda}
-When we ran LDA on the Facebook statuses, we observed that words that can represent a similar disposition are spread across multiple topics.
 
 Observing the top topic terms output by LDA, we observe that there are some words that occur across topics causing the topic distribution values to get distributed across multiple topics. This way, no one topic gets a high score and this is not helpful in determining what topics are predictive of \textit{depression}. These topics demonstrate similar feeling and if the topic distribution for statuses get distributed across these two topics, we would not get a clear indication of what the underlying feeling of the user was when this was posted. For example, the words \textit{sad}, \textit{laugh}, \textit{feel}, \textit{love} occur in more than one topic in LDA. Another point to notice is that all the topics in Table \ref{table:ldawords_1} signify mixed feelings and do not help in identifying a particular emotion. As depression is usually indicated by use of words that signify \textit{sadness} and lack of depression by words that signify \textit{happiness}, it will be helpful to have topics that capture these emotions separately. Note that smile and sad occur in the same topic, so we cannot distinguish between these using the topic distribution. So, to mitigate this we try to use \textit{SeededLDA}, to guide topic models to learn topics that are of specific interest to us.
 
@@ -17,12 +16,11 @@ Table \ref{table:seedwords_1} refers to the seeds used for \textit{SeededLDA}. O
 {topic~4: laugh, smile, run, love, vain, joke, ruin, night, party}\\
 \hline
     \end{tabular}
-      \caption{\noindent Seed words for \textit{SeededLDA}}
+      \caption{\noindent LDA topics. Note that some words repeat across multiple topics}
         \label{table:ldawords_1}
 %\end{center}
 \end{table*}
 
-We observed that LDA on the Facebook statuses
 \begin{table*} [ht!]
 %\begin{center}
 	\begin{tabular}{ l }
@@ -39,22 +37,22 @@ We observed that LDA on the Facebook statuses
 %\end{center}
 \end{table*}
 
-\textit{SeededLDA} was run with for \textit{10} topics, of which \textit{5} topics are seeded with words in Table \textit{seedwords\_1} and \textit{5} topics are un-seeded. It was run for \textit{500 iterations} with standard values for $\alpha$ and $\beta$. The topics that are not seeded capture any words in the data that were missed in our seed words. \textit{SeededLDA} finds the words that are related to the seed words and places those words in the same topic. This helps because we don't need to identify all the words corresponding to depression and lack of depression. SeededLDA will gather these words as placing the related words in the same topic.
+\textit{SeededLDA} was run with for \textit{10} topics, of which \textit{5} topics are seeded with words in Table \textit{seedwords\_1} and \textit{5} topics are un-seeded. It was run for \textit{500 iterations} with standard values for $\alpha$ and $\beta$. The topics that are not seeded capture any words in the data that were missed in our seed words. \textit{SeededLDA} finds the words that are related to the seed words and places those words in the same topic. This helps because we don't need to identify all the words corresponding to depression and lack of depression. SeededLDA will gather these words as placing the related words in the same topic. The underlined words in \ref{Table:seedwords_2} are words that SeededLDA gets which are not provided as seeds but are fetched by SeededLDA. This is helpful as we don't need to compile an all encompassing word list for each topic, but only need to specify a few words to guide SeededLDA, which SeededLDA will use to find related words.
 
 
 \begin{table*} [ht!]
 %\begin{center}
 	\begin{tabular}{ l }
 	\hline
-{topic~1: work, bad, tired, stress, time, cry, pain}\\
-{topic~2: happy, glad, excited, fun, energy, pleasant, love, awesome}\\
-{topic~3: love, life, heart, surprise, joyful, smile}\\
-{topic~4: unpleasant, unhappy, sad, irritated, hate, jealous, gloomy, disappointed }\\
-{topic~5: hate, awful, fuck, indecision, bored}\\
+{topic~1: work, bad, tired, stress, time, cry, pain, \underline{stressful}, \underline{tomorrow}, \underline{today}, \underline{satisfaction}, \underline{tense}}\\
+{topic~2: happy, glad, excited, fun, energy, \underline{energetic}, pleasant, \underline{playful}, \underline{amazing}, \underline{awesome}}\\
+{topic~3: love, life, heart, surprise, joyful, smile, nice,\underline{live}, \underline{like}, \underline{desire}, \underline{laugh}, \underline{sing}}\\
+{topic~4: unpleasant, unhappy, sad, irritated, stupid, hate, bored, \underline {insomnia}, \underline{damn}, }\\
+{topic~5: hate, awful, fuck, indecision, bored \underline{worry}, \underline{cry} \underline{difficult}, \underline{die} \underline{kill}}\\
 \hline
     \end{tabular}
       \caption{\noindent Top topic terms for \textit{seeded} topics output by \textit{SeededLDA}}
-        \label{table:seedwords_1}
+        \label{table:seedwords_2}
 %\end{center}
 \end{table*}
 
@@ -83,5 +81,5 @@ We further experimented with seed words from DSM-IV manual\cite{dsm4}. On page 3
 %\end{center}
 \end{table*}
 
-In Section \ref{sec:results}, we discuss the effect of inclusion of \textit{SeededLDA} features in our model. We also rank features using \textit{Pearson} correlation coefficient with the target variable and we find that some of the \textit{SeededLDA} features correlate with the target variable resonating our belief that use of some specific words in Facebook status is indicative of \textit{depression}.
+In Section \ref{sec:experiments}, we discuss the effect of inclusion of \textit{SeededLDA} features in our model. We also rank features using \textit{Pearson} correlation coefficient with the target variable and we find that some of the \textit{SeededLDA} features correlate with the target variable resonating our belief that use of some specific words in Facebook status is indicative of \textit{depression}.
 
