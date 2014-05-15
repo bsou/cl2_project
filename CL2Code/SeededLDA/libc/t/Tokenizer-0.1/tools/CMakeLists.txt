@@ -1,0 +1,32 @@
+INCLUDE_DIRECTORIES(
+	${WIKICLUST_SOURCE_DIR}
+)
+
+ADD_LIBRARY(tools
+	Exception.h
+	Exception.cpp
+	FastGetLine.h
+	FastGetLine.cpp
+	FastLoadFile.h
+	FastLoadFile.cpp
+	Hash.h
+	Hash.hxx
+	HashElement.h
+	HashElement.hxx
+	HashElementFactory.h
+	HashElementFactory.hxx
+	ports.h
+	ports.cpp
+	SortFile.h
+	SortFile.hxx
+	SortFileThread.h
+	SortFileThread.hxx
+	StringFactory.cpp
+	StringFactory.h
+	Trie.h
+	Trie.hxx
+	TrieFactory.h
+	TrieFactory.hxx
+	TrieNode.h
+	TrieNode.hxx
+)
