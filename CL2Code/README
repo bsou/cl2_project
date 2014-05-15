@@ -29,6 +29,11 @@ Extracting feature set for train and test data (this will create arff files)
 
 1. python all_features.py
 
+Running SeededLDA feature extraction
+
+1. Go to SeededLDA/src folder
+2. /a.out ../data/status/config.status ./models/model.out save
+
 Running cross validation and prediction
 
 1. Load the arff files into weka and select NaiveBayes classifier

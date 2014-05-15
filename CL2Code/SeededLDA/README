@@ -1,0 +1,90 @@
+NOTE:
+==============
+	This is the source code for the paper Jagadeesh Jagarlamudi, Hal 
+	Daumé III,Raghavendra Udupa, Incorporating Lexical Priors into Topic 
+	Models, in Proceedings of EACL 2012. 
+
+	This is a research code and is developed incrementally. So, it is not
+	well organized and also some parts are not relevant. For example: the
+	perplexity computation function is incorrect, if you need this then you
+	need to modify the code or contact the authors. Unfortunately, this code
+	is not commented at all. Use it at your own risk.
+
+	This code assumes that the number of seed topics is same as the number 
+	of regular topics. It needs to be extended when they are not the same.
+
+
+Compilation:
+==============
+	cd src
+	c++ -I../libc SeededLDA.cpp
+	c++ -I../libc SeededLDA_M1.cpp
+	c++ -I../libc GibbsLDA.cpp
+
+How To Run:
+==============
+	
+	1. Create a configuration file
+
+		Example configuration file is provided in data/config.reuters
+
+		Configuration file provides information about the input data (as
+		indices), hyperparameter values and the seed words. Following are 
+		the config options:
+
+		 Input Data:
+
+		  The input data is provided as a set of word and document 
+		  indices. sSrcWordIndices and sSrcDocIndices are the file paths
+		  of the word and document indices files respectively. Each line 
+		  of these files gives information about a token in the input data, 
+		  and there are as many lines as the total number of tokens. The 
+		  sSrcWords file lists all the words in the vocabulary. The i^th 
+		  word in the vocabulary is in i th line, so this file has as many 
+		  lines as the size of the vocab.
+
+		  sSrcWordIndices	# File path of the word indices 
+		  sSrcDocIndices	# File path of the document indices 
+		  sSrcWords			# File path of the actual words 
+
+		 Parameters / Hyper-parameters:
+
+		  iNoTopics			# Number of topics. The current code assumes
+		  					that the number of topics is same as the seed
+							topics.
+		  iNoIterations		# Number of iterations of the sampling process.
+		  dAlpha			# alpha hyperparameter value (double precision)
+		  dBeta				# beta hyperparameter value (double precision)
+		  dMu0				# This is beta_s hyperparameter in the paper
+		  dTau0				# We set pi and tau parameters of the model to 
+		  					  this parameter.
+
+		 Seed Topics:
+
+		  bAllowSeedTopics	# Boolean value of 1 or 0 . If this variable is set
+		  					to 0 then, ideally, the result should be same as
+							the GibbsLDA. But it may differ because of randomness.
+		  sSeedTopicalWordsPath	
+		  					# File path of the seed words. Currently, the code 
+							assumes that the number seed topics is same as
+							the number of regular topics. Each line of this
+							file lists seed words (comma separated) for that
+							topic. The number of lines should be same as the
+							number of topics.
+
+	2. Executing the programs
+
+		There are two modes. In the first mode you can run the code and ask it
+		to save the model for later use (this is referred as 'save' mode). In the
+		second mode, it can load the saved model and run (referred as 'load');
+
+		Ex: ./a.out <config_file_path> <model_path> 'save/load'
+
+		If you specify the save mode, then the code runs and dumps the model in
+		the path given. This can be used for later use.
+
+		If you specify the load mode, then the code loads the saved model and runs.
+
+		Alternatively, you can completely ignore the model argument as follows:
+
+		Ex: ./a.out <config_file_path> 

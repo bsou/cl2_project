@@ -1,0 +1,20 @@
+Basic Installation
+==================
+
+1) Path of Libraries.
+In order to compile this software you need to have CppUnit, Glib and Expat 
+installed on you system.
+Paths for these library are set in CMakeLists.txt file. By defaults, these
+pathes are those of Debian/Ubuntu system. If you have an other system, 
+please change GLIB_LIB_INCLUDE, GLIB_INCLUDE, EXPAT_INCLUDE and 
+CPPUNIT_INCLUDE path.
+
+Build in release mode:
+launch cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALLATION_PREFIX=/usr/local
+
+replace /usr/local by any other path you want to install
+
+then launch:
+
+make
+make install

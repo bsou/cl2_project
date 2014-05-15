@@ -1,0 +1,34 @@
+PROJECT(WIKICLUST)
+
+IF(UNIX)
+	SET(CMAKE_CXX_COMPILER "g++")
+	SET(CMAKE_CXX_FLAGS "-pipe -Wall -ansi -pedantic -pthread")
+	SET(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O2 -g")
+	SET(CMAKE_CXX_FLAGS_DEBUG "-g2")
+#	SET(CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG -march=pentium4")
+	SET(CMAKE_CXX_FLAGS_RELEASE "-O2 -march=nocona")
+ENDIF(UNIX)
+
+SET(CMAKE_VERBOSE_MAKEFILE	true)
+SET(LIBRARY_OUTPUT_PATH		${WIKICLUST_SOURCE_DIR}/olib)
+
+LINK_DIRECTORIES(
+	${WIKICLUST_SOURCE_DIR}/olib
+)
+
+INCLUDE_DIRECTORIES(
+	${WIKICLUST_SOURCE_DIR}
+	
+)
+
+IF(NOT CMAKE_BUILD_TYPE)
+  SET(CMAKE_BUILD_TYPE RelWithDebInfo CACHE STRING
+      "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel." FORCE)
+ENDIF(NOT CMAKE_BUILD_TYPE)
+
+SET(GLIB_LIB_INCLUDE "/usr/lib/glib-2.0/include")
+SET(GLIB_INCLUDE "/usr/include/glib-2.0")
+SET(CPPUNIT_INCLUDE "/usr/src")
+SET(EXPAT_INCLUDE "/usr/src")
+
+SUBDIRS(tools tokenizer tests)
