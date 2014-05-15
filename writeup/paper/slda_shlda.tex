@@ -1,5 +1,35 @@
 %!TEX root = cl2-project.tex
 \subsection{SLDA}
+\label{sec:slda}
 Look at topics from SLDA
-\subsection{SHLDA}
-Gives a hierarchy of topics. This makes sense in the following scenario: let's say our topic detected was 'party'. But a depressed person talking about a party might be very different from a happy person. SHLDA would help us find these situations.
+
+We ran \textit{SLDA}, training on \textit{depression} as target. Table \ref{table:slda} gives the top topic words as output by \textit{SLDA}. 
+
+\begin{table*} [ht!]
+%\begin{center}
+	\begin{tabular}{ l }
+	\hline
+{topic~1: $laugh\_right$	, $paper\_route$, $annoyed\_bit$,	$txt\_love$,	$sky\_view$,	$slap\_slap$, 	}\\
+\indent {$social\_dance$,	$swim\_team$,	wee, 	$afraid\_love$,	$feel\_much$,	$love\_duty$,	$man\_wish$,	$talking\_best$,} \\
+	{$today\_txt$,	$work\_soon$,	$annoyed\_bored$ }\\
+	\midrule
+${topic~2: smile\_smile,	left\_right,	press,	song\_day,	amazing\_smile,	circles\_appear	, down\_magic,	enter\_key,}$\\	
+${right\_click,	down\_down,	support\_dumbledore,	way\_rid,	green\_day,	makes\_everything,	smile\_listening,}$\\
+	${white\_stripes,	chemical\_romance,	cleaning\_room,	log\_refresh,	one\_better}$\\
+		\midrule
+${topic~3:  laugh	, smile,	love,	not,	now,	out,	one,	day,	time,	today,	laughing\_out,	know,	laugh\_laugh,	}$\\
+${people,	think,	life,	sad,	gon,	back,	see}$\\
+	\midrule
+${topic~4: laugh\_home, 	listening\_music, 	much\_homework, 	give\_weird, 	rolling, 	enjoying\_weather, 	backing, 	}$\\	
+${going\_cry,	learned\_looking,	really\_cool, show\_tonight,	time\_relax,	jury\_duty,	laugh\_sabbath,	math\_homework,}$\\
+${really\_annoying,	vampire\_weekend,	always\_wondered,	before\_school,	home\_watching}$\\
+\hline
+    \end{tabular}
+      \caption{\noindent Seed words for \textit{SeededLDA} using DSM-IV}
+        \label{table:slda}
+%\end{center}
+\end{table*}
+
+The words in \textit{SLDA} reflect the mood of the user better as they are trained using the depression labels. For instance, the words---\textit{time\_relax}, \textit{really\_cool}, \textit{really\_annoying}, {annoyed\_bored} and \textit{afraid\_love} capture mood swings that can relate to depression. Notice that the words here reflect a better picture of user's state of mind as they are obtained by supervision on the depression label.
+
+The \textit{LDA} variants help in understanding the language better and how use of specific words continuously can signify an occurrence of depressive episode.
